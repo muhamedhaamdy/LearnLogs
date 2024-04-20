@@ -1,0 +1,40 @@
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
+from flask_login import current_user
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, InputRequired
+
+
+class EnrollForm(FlaskForm):
+    student_name = StringField('Student Name',
+                           validators=[DataRequired(), Length(min=2, max=60)])
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password')])
+    student_phone = StringField('Student Number',   
+                           validators=[DataRequired(), Length(min=11, max=11)])
+    parent_name = StringField('Parent Name',
+                           validators=[DataRequired()])
+    parent_phone = StringField('Parent Number',
+                           validators=[DataRequired(), Length(min=11, max=11)])
+    address = StringField('Address',
+                           validators=[DataRequired()])
+    photo_link = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    grade = SelectField('Grade', choices=[('first', 'first'), 
+                                          ('second', 'second'), ('third', 'third')], validators=[InputRequired()])
+
+    enroll = SubmitField('enroll')
+
+    # def validate_email(self, email):
+    #     user = User.query.filter_by(email=email.data).first()
+    #     if user:
+    #         raise ValidationError('That email is taken. Please choose a different one.')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')

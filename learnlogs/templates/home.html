@@ -1,0 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Welcome Student</h1>
+    <p>want to enroll with us <a href="{{ url_for('enroll') }}">enroll</a></p>
+    <p>Already enrolled <a href="{{ url_for('login') }}">login</a></p>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Welcome {{ student.student_name }}</h1>
+    <h2>Here are your logs:</h2>
+    <ul>
+        {% for session in sessions %}
+            <li>session:{{session.id}} his attendacne 
+                {% if session in attended %}
+                    True
+                {% else %}
+                    False
+                {% endif %}
+                {% for mark in marks %}
+                    {% if mark.session_id == session.id %}
+                        | Mark: {{ mark.mark }}
+                    {% endif %}
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+    <!-- <ul>
+        {% for mark in marks %}
+            {% if mark.mark is none %}
+                <li>session {{ mark.session_id }}: no mark</li>
+            {% else %}
+                <li>session {{ mark.session_id }}: {{ mark.mark }}/10</li>
+            {% endif %}
+        {% endfor %}
+    </ul> -->
+{% endblock content %}
