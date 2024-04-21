@@ -1,30 +1,32 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Welcome {{ student.student_name }}</h1>
-    <h2>Here are your logs:</h2>
-    <ul>
-        {% for session in sessions %}
-            <li>session:{{session.id}} his attendacne 
-                {% if session in attended %}
-                    True
-                {% else %}
-                    False
-                {% endif %}
-                {% for mark in marks %}
-                    {% if mark.session_id == session.id %}
-                        | Mark: {{ mark.mark }}
-                    {% endif %}
-                {% endfor %}
-            </li>
-        {% endfor %}
-    </ul>
-    <!-- <ul>
-        {% for mark in marks %}
-            {% if mark.mark is none %}
-                <li>session {{ mark.session_id }}: no mark</li>
-            {% else %}
-                <li>session {{ mark.session_id }}: {{ mark.mark }}/10</li>
-            {% endif %}
-        {% endfor %}
-    </ul> -->
+    <div class="container">
+        <div class="first">
+            First Grade
+            <div class="brief">
+                all the students in the first grade {{student_first}}
+                all session in the first grade {{session_first}}
+            </div>
+            <a href="{{url_for('dashboard_grade', grade='first')}}">detalis</a>
+            <a href="{{url_for('home')}}">craete session</a>
+        </div>
+        <div class="second">
+            second Grade
+            <div class="brief">
+                all the students in the second grade {{student_second}}
+                all session in the second grade {{session_second}}
+            </div>
+            <a href="{{url_for('dashboard_grade', grade='second')}}">detalis</a>
+            <a href="{{url_for('home')}}">craete session</a>
+        </div>
+        <div class="third">
+            third Grade
+            <div class="brief">
+                all the students in the third grade {{student_third}}
+                all session in the third grade {{session_third}}
+            </div>
+            <a href="{{url_for('dashboard_grade', grade='third')}}">detalis</a>
+            <a href="{{url_for('home')}}">craete session</a>
+        </div>
+    </div>
 {% endblock content %}

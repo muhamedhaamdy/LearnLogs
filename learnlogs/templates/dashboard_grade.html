@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="name">
+        <div>student marks attendance</div>
+        {% for student in students %}
+            <div class="student">
+                <div class="student-name">
+                    <p>student name is :{{all_students[student.id][0]['student_name']}} - and his marks precentage is:{{ all_students[student.id][0]['precentage'] }}% - and his attendace is:{{(all_students[student.id][0]['attendance']|length / sessions|length) * 100}}%</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

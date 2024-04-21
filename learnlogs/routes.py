@@ -6,6 +6,8 @@ from learnlogs import app, db, bcrypt
 from learnlogs.forms import EnrollForm, LoginForm
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
+from learnlogs.data import get_by_grade
+
 
 '''
 , UpdateAccountForm, PostForm
@@ -44,22 +46,43 @@ def enroll():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        if form.email.data == 'teacher@elsheko.com' and form.password.data == '1234':
+            return redirect(url_for('dashboard'))
         student = Student.query.filter_by(email=form.email.data).first()
         if student and bcrypt.check_password_hash(student.password, form.password.data):
             login_user(student, remember=False)
-            return redirect(url_for('dashboard', id=student.id))
+            return redirect(url_for('profile', id=student.id))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route('/dashboard/<id>', methods=['GET', 'POST'])
-def dashboard(id):
+@app.route('/dashboard', methods=['GET', 'POST'])
+def dashboard():
+    student_first = len(Student.query.filter_by(grade='first').all())
+    student_second = len(Student.query.filter_by(grade='second').all())
+    student_third = len(Student.query.filter_by(grade='third').all())
+    session_first = len(Session.query.filter_by(grade='first').all())
+    session_second = len(Session.query.filter_by(grade='second').all())
+    session_third = len(Session.query.filter_by(grade='third').all())
+    return render_template('dashboard.html', student_first=student_first, 
+                           student_second=student_second, student_third=student_third, session_first=session_first,
+                            session_second=session_second, session_third=session_third)
+
+@app.route('/dashboard/<string:grade>', methods=['GET', 'POST'])
+def dashboard_grade(grade):
+    all_data = get_by_grade(grade)
+    students = Student.query.filter_by(grade=grade).all() 
+    session = Session.query.filter_by(grade=grade).all()
+    return render_template('dashboard_grade.html', all_students=all_data, students=students, sessions=session)
+
+@app.route('/profile/<int:id>', methods=['GET', 'POST'])
+def profile(id):
     student = Student.query.filter_by(id=id).first()
     all_session = Session.query.filter_by(grade=student.grade).all()
     student_attended = sorted(student.attended, key=lambda session: session.id)
     student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
     if student:
-        return render_template('dashboard.html', student=student,
+        return render_template('student_profile.html', student=student,
                                marks=student_marks, attended=student_attended, sessions=all_session)
 
 
