@@ -1,24 +1,34 @@
-{% extends "layout.html" %}
-    {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Session</title>
+</head>
+<body>
+    <h1>Create Session</h1>
     <form method="POST">
         <table>
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Mark</th>
-                    <th>Attendance</th>
+                    <th>Full Mark</th>
+                    <th>Grade</th>
+                    <th>Full Grade</th>
                 </tr>
             </thead>
             <tbody>
                 {% for student, form in form %}
                 <tr>
                     <td>{{ student.student_name }}</td>
-                    <td>{{ form.quiz_mark }}</td>
-                    <td>{{ form.absent }}</td>
-                    <td>{{ form.submit }}</td>
+                    <td><input type="number" name="{{ form.quiz_mark.name }}" value="{{ form.quiz_mark.data }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>
-            {{ form.quiz_full_mark }}
-        </form>
-        {% endblock content %}
+        </table>
+        <td><input type="number" name="{{ button.quiz_full_mark.name }}" value="{{ button.quiz_full_mark.data }}"></td>
+        {{ button.submit }}
+    </form>
+</body>
+</html>

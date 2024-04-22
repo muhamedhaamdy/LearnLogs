@@ -41,10 +41,10 @@ class LoginForm(FlaskForm):
 class QuizForm(FlaskForm):
     absent = BooleanField('Absent')
     quiz_mark = IntegerField('Quiz Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
-    quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
     submit = SubmitField('Submit')
 
 class SubmibButton(FlaskForm):
+    quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
     submit = SubmitField('Submit')
     # def validate_quiz_mark(self, quiz_mark):
     #     if self.absent.data == False and self.quiz_mark.data > self.quiz_full_mark.data:

@@ -87,29 +87,28 @@ def profile(id):
 
 @app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
 def create_session(grade):
-    forms = []
-    button = SubmibButton()
-    students = Student.query.filter_by(grade=grade).all()
-    new_session = Session(grade=grade)
-    db.session.add(new_session)
-    db.session.commit()
-    for student in students:
-        form = QuizForm()
-        forms.append((student, form))
-    if request.method == 'POST':
-        for student, form in forms:
-            print(form.quiz_mark.data, button.quiz_full_mark.data)
-            if button.validate_on_submit():
+        forms = []
+        button = SubmibButton()
+        students = Student.query.filter_by(grade=grade).all()
+        new_session = Session(grade=grade)
+        db.session.add(new_session)
+        db.session.commit()
+        for student in students:
+            form = QuizForm()
+            forms.append((student, form))
+        if button.validate_on_submit():
+            for student, form in forms:
                 student_session_entry = Student_Session.insert().values(student_id=student.id, 
-                                                                  session_id=new_session.id, 
-                                                                  mark=form.quiz_mark.data, 
-                                                                  full_mark=button.quiz_full_mark.data)
+                                                                            session_id=new_session.id, 
+                                                                            mark=form.quiz_mark.data, 
+                                                                            full_mark=button.quiz_full_mark.data)
                 db.session.execute(student_session_entry)
                 db.session.commit()
                 return redirect(url_for('dashboard_grade', grade=grade))
-        # return redirect(url_for('dashboard_grade', grade=grade))
-    return render_template('create_session.html', form=forms, session=new_session, button=button)
+            
+        return render_template('create_session.html', form=forms, session=new_session, button=button)
 
+        
 """ 
 @app.route("/logout")
 def logout():
