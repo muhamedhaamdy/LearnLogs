@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from learnlogs import app, db, bcrypt
-from learnlogs.forms import EnrollForm, LoginForm
+from learnlogs.forms import EnrollForm, LoginForm, QuizForm, SubmibButton
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
 from learnlogs.data import get_by_grade
@@ -85,6 +85,30 @@ def profile(id):
         return render_template('student_profile.html', student=student,
                                marks=student_marks, attended=student_attended, sessions=all_session)
 
+@app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
+def create_session(grade):
+    forms = []
+    button = SubmibButton()
+    students = Student.query.filter_by(grade=grade).all()
+    new_session = Session(grade=grade)
+    db.session.add(new_session)
+    db.session.commit()
+    for student in students:
+        form = QuizForm()
+        forms.append((student, form))
+    if request.method == 'POST':
+        for student, form in forms:
+            print(form.quiz_mark.data, button.quiz_full_mark.data)
+            if button.validate_on_submit():
+                student_session_entry = Student_Session.insert().values(student_id=student.id, 
+                                                                  session_id=new_session.id, 
+                                                                  mark=form.quiz_mark.data, 
+                                                                  full_mark=button.quiz_full_mark.data)
+                db.session.execute(student_session_entry)
+                db.session.commit()
+                return redirect(url_for('dashboard_grade', grade=grade))
+        # return redirect(url_for('dashboard_grade', grade=grade))
+    return render_template('create_session.html', form=forms, session=new_session, button=button)
 
 """ 
 @app.route("/logout")

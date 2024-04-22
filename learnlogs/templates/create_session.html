@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+    {% block content %}
+    <form method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Mark</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student, form in form %}
+                <tr>
+                    <td>{{ student.student_name }}</td>
+                    <td>{{ form.quiz_mark }}</td>
+                    <td>{{ form.absent }}</td>
+                    <td>{{ form.submit }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {{ form.quiz_full_mark }}
+        </form>
+        {% endblock content %}
