@@ -3,15 +3,13 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from learnlogs import app, db, bcrypt
-from learnlogs.forms import EnrollForm, LoginForm, QuizForm, SubmibButton
+from learnlogs.forms import EnrollForm, LoginForm, QuizForm, Submit_Student_mark
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
 from learnlogs.data import get_by_grade
 
 
-'''
-, UpdateAccountForm, PostForm
-'''
+
 
 @app.route("/")
 @app.route("/home")
@@ -47,6 +45,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         if form.email.data == 'teacher@elsheko.com' and form.password.data == '1234':
+            login_user(Student.query.filter_by(email='teacher@elsheko.com').first(), remember=False)
             return redirect(url_for('dashboard'))
         student = Student.query.filter_by(email=form.email.data).first()
         if student and bcrypt.check_password_hash(student.password, form.password.data):
@@ -58,58 +57,85 @@ def login():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
-    student_first = len(Student.query.filter_by(grade='first').all())
-    student_second = len(Student.query.filter_by(grade='second').all())
-    student_third = len(Student.query.filter_by(grade='third').all())
-    session_first = len(Session.query.filter_by(grade='first').all())
-    session_second = len(Session.query.filter_by(grade='second').all())
-    session_third = len(Session.query.filter_by(grade='third').all())
-    return render_template('dashboard.html', student_first=student_first, 
-                           student_second=student_second, student_third=student_third, session_first=session_first,
-                            session_second=session_second, session_third=session_third)
+    if current_user.is_authenticated:
+        if current_user.email==('teacher@elsheko.com'):
+            student_first = len(Student.query.filter_by(grade='first').all())
+            student_second = len(Student.query.filter_by(grade='second').all())
+            student_third = len(Student.query.filter_by(grade='third').all())
+            session_first = len(Session.query.filter_by(grade='first').all())
+            session_second = len(Session.query.filter_by(grade='second').all())
+            session_third = len(Session.query.filter_by(grade='third').all())
+            return render_template('dashboard.html', student_first=student_first, 
+                                student_second=student_second, student_third=student_third, 
+                                session_first=session_first, session_second=session_second, 
+                                session_third=session_third)
+        else :
+            return "this page is only for teacher", 403
+    else:
+        return "this page is only for teacher", 403  
 
+@login_required
 @app.route('/dashboard/<string:grade>', methods=['GET', 'POST'])
 def dashboard_grade(grade):
-    all_data = get_by_grade(grade)
-    students = Student.query.filter_by(grade=grade).all() 
-    session = Session.query.filter_by(grade=grade).all()
-    return render_template('dashboard_grade.html', all_students=all_data, students=students, sessions=session)
+    if current_user.is_authenticated:
+        if current_user.email==('teacher@elsheko.com'):
+                all_data = get_by_grade(grade)
+                students = Student.query.filter_by(grade=grade).all() 
+                session = Session.query.filter_by(grade=grade).all()
+                return render_template('dashboard_grade.html', all_students=all_data, students=students, sessions=session)
+        else:
+            return "Unauthorized access", 403
+    else:
+        return "Unauthorized access", 403  
 
+@login_required
 @app.route('/profile/<int:id>', methods=['GET', 'POST'])
 def profile(id):
-    student = Student.query.filter_by(id=id).first()
-    all_session = Session.query.filter_by(grade=student.grade).all()
-    student_attended = sorted(student.attended, key=lambda session: session.id)
-    student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
-    if student:
-        return render_template('student_profile.html', student=student,
-                               marks=student_marks, attended=student_attended, sessions=all_session)
-
+    if current_user.is_authenticated :
+        if current_user.id == id or current_user.email==('teacher@elsheko.com') :
+            student = Student.query.filter_by(id=id).first()
+            all_session = Session.query.filter_by(grade=student.grade).all()
+            student_attended = sorted(student.attended, key=lambda session: session.id)
+            student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
+            if student:
+                return render_template('student_profile.html', student=student,
+                                    marks=student_marks, attended=student_attended, sessions=all_session)
+        else :
+            return "you can only view your profile", 403
+    else:
+        return "you can only view your profile", 403
+@login_required
 @app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
+
 def create_session(grade):
-        forms = []
-        button = SubmibButton()
-        students = Student.query.filter_by(grade=grade).all()
-        new_session = Session(grade=grade)
-        db.session.add(new_session)
-        db.session.commit()
-        for student in students:
-            form = QuizForm()
-            forms.append((student, form))
-        if button.validate_on_submit():
-            for student, form in forms:
-                student_session_entry = Student_Session.insert().values(student_id=student.id, 
-                                                                            session_id=new_session.id, 
-                                                                            mark=form.quiz_mark.data, 
-                                                                            full_mark=button.quiz_full_mark.data)
-                db.session.execute(student_session_entry)
+    if current_user.is_authenticated:
+        if current_user.email==('teacher@elsheko.com'):
+            students = Student.query.filter_by(grade=grade).all()
+            
+            form = Submit_Student_mark()
+            new_session = Session(grade=grade)
+
+            if form.validate_on_submit():
+                db.session.add(new_session)
+                db.session.commit()
+                for student, student_form in zip(students, form.students_list):
+                    student_session_entry = Student_Session.insert().values(
+                        student_id=student.id,
+                        session_id=new_session.id,
+                        mark=student_form.quiz_mark.data,
+                        full_mark=form.quiz_full_mark.data
+                    )
+                    db.session.execute(student_session_entry)
                 db.session.commit()
                 return redirect(url_for('dashboard_grade', grade=grade))
-            
-        return render_template('create_session.html', form=forms, session=new_session, button=button)
-
-        
-""" 
+            else:
+                print("Form validation failed!")
+                print(form.errors)
+        return render_template('create_session.html', form=form, session=new_session, students=students)
+    else:
+        return "Unauthorized access", 403
+    
+@login_required
 @app.route("/logout")
 def logout():
     logout_user()
@@ -129,7 +155,7 @@ def save_picture(form_picture):
 
     return picture_fn
 
-
+"""
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
