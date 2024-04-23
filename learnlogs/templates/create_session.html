@@ -7,28 +7,24 @@
 </head>
 <body>
     <h1>Create Session</h1>
+    <h2>Grade: {{ session.grade }}</h2>
     <form method="POST">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Mark</th>
-                    <th>Full Mark</th>
-                    <th>Grade</th>
-                    <th>Full Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for student, form in form %}
-                <tr>
-                    <td>{{ student.student_name }}</td>
-                    <td><input type="number" name="{{ form.quiz_mark.name }}" value="{{ form.quiz_mark.data }}"></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <td><input type="number" name="{{ button.quiz_full_mark.name }}" value="{{ button.quiz_full_mark.data }}"></td>
-        {{ button.submit }}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <fieldset>
+            <legend>Quiz Information</legend>
+            <label for="quiz_full_mark">Quiz Full Mark:</label>
+            {{ form.quiz_full_mark(size=5, class="form-control") }}
+            {%for student, student_form in zip(students, form.students_list):%}
+
+                <div class="student-form">
+                    <h3>Student {{ student.student_name }}</h3>
+                    <label for="{{ student_form.quiz_mark.id }}">Quiz Mark for {{ student_form.absent.label.text }}:</label>
+                    {{ student_form.absent(class="form-check-input") }}
+                    {{ student_form.quiz_mark(size=5, class="form-control") }}
+                </div>
+            {% endfor %}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
     </form>
 </body>
 </html>

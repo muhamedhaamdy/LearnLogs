@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
 from learnlogs.models import Student
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField
+from wtforms import FormField,FieldList,StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, InputRequired, NumberRange
 
 
@@ -40,12 +40,14 @@ class LoginForm(FlaskForm):
 
 class QuizForm(FlaskForm):
     absent = BooleanField('Absent')
-    quiz_mark = IntegerField('Quiz Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
+    quiz_mark = IntegerField('Quiz Mark')
+
+class Submit_Student_mark(FlaskForm):
+    quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
+    students_list = FieldList(FormField(QuizForm),min_entries=30)
     submit = SubmitField('Submit')
 
-class SubmibButton(FlaskForm):
-    quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
-    submit = SubmitField('Submit')
+
     # def validate_quiz_mark(self, quiz_mark):
     #     if self.absent.data == False and self.quiz_mark.data > self.quiz_full_mark.data:
     #         raise ValidationError('Quiz mark should be less than or equal to the full mark')

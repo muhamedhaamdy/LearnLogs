@@ -12,7 +12,10 @@ def get_by_grade(grade):
         total_mark_for_student = 0
         for mark in student_mark:
             all_mark.append({'session':mark.session_id, 'mark':mark.mark, 'full_mark':mark.full_mark})
-            total_mark_for_student += mark.mark/mark.full_mark
+            if mark.mark is not None and mark.full_mark is not None:
+                total_mark_for_student += mark.mark / mark.full_mark
+            else:
+                continue
         total_mark_precision = total_mark_for_student/len(all_session) * 100
         
         all_student_data[student.id]=[{'student_name':student.student_name, 'email':student.email, 
