@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
+from flask_wtf.form import _Auto
 from learnlogs.models import Student
 from wtforms import FormField,FieldList,StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, InputRequired, NumberRange
@@ -44,7 +45,7 @@ class QuizForm(FlaskForm):
 
 class Submit_Student_mark(FlaskForm):
     quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
-    students_list = FieldList(FormField(QuizForm),min_entries=30)
+    students_list = FieldList(FormField(QuizForm),min_entries=1000)
     submit = SubmitField('Submit')
 
 
