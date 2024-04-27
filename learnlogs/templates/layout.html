@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="../static/styles/layout.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/main.css">
     {% if title %}
       <title>LearnLogs - {{ title }}</title>
       {% if title == 'Home' %}
@@ -38,8 +38,8 @@
     <header class="site-header">
     </header>
     <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
@@ -68,7 +68,7 @@
                       <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
                     {% else %}
                       <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                      <a class="nav-item nav-link" href="{{ url_for('enroll') }}">Enroll</a>
+                      <a class="nav-item nav-link" href="{{ url_for('enroll') }}">enroll</a>
                     {% endif %}
                   </div>
                 </div>

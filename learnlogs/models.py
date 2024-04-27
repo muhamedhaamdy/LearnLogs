@@ -22,7 +22,7 @@ class Student(db.Model, UserMixin):
     parent_name = db.Column(db.String(60), nullable=False)
     parent_phone = db.Column(db.String(11), nullable=False)
     address = db.Column(db.String(100), nullable=False)
-    photo_link = db.Column(db.String(100))
+    photo_link = db.Column(db.String(100), default='default.jpg')
     grade = db.Column(db.String(10), nullable=False)    
     attended = db.relationship('Session', secondary=Student_Session, backref='attended_student')
 
