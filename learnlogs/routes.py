@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from learnlogs import app, db, bcrypt
-from learnlogs.forms import EnrollForm, LoginForm, QuizForm, Submit_Student_mark, SessionForm
+from learnlogs.forms import EnrollForm, LoginForm, Submit_Student_mark, SessionForm
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
 from learnlogs.data import get_by_grade
@@ -108,7 +108,7 @@ def profile(id):
 
 @login_required
 @app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
-def create_session(grade):
+def evaluate(grade):
     if current_user.is_authenticated:
         if current_user.email==('teacher@elsheko.com'):
             students = Student.query.filter_by(grade=grade).all()
@@ -131,13 +131,13 @@ def create_session(grade):
             else:
                 print("Form validation failed!")
                 print(form.errors)
-        return render_template('create_session.html', form=form, session=new_session, 
+        return render_template('evalute.html', form=form, session=new_session, 
                                students=students, title='create_session')
     else:
         return "Unauthorized access", 403
 
 @app.route('/session/<string:grade>', methods=['GET', 'POST'])
-def session_info_for_teacher(grade):
+def create_session(grade):
     if current_user.is_authenticated:
         if current_user.email==('teacher@elsheko.com'):
             form = SessionForm()

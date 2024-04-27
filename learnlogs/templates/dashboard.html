@@ -1,32 +1,53 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container">
-        <div class="first">
-            First Grade
-            <div class="brief">
-                all the students in the first grade {{student_first}}
-                all session in the first grade {{session_first}}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Hello {{current_user.student_name}}<X/h1>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='first')}}">detalis</a>
-            <a href="{{url_for('create_session', grade='first')}}">craete session</a>
-        </div>
-        <div class="second">
-            second Grade
-            <div class="brief">
-                all the students in the second grade {{student_second}}
-                all session in the second grade {{session_second}}
+            <div class="col-md-8 justify-content-center">
+                <div class="card h-100 "> <!-- Added 'h-100' class to make the card full height -->
+                    <div class="card-body ">
+                        <h5 class="card-title">First Grade</h5>
+                        <div class="brief">
+                            <p>All students in the first grade: {{ student_first }}</p>
+                            <p>All sessions in the first grade: {{ session_first }}</p>
+                        </div>
+                        <a href="{{ url_for('dashboard_grade', grade='first') }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('create_session', grade='first') }}" class="btn btn-secondary">Create Session</a>
+                        <a href="{{ url_for('evaluate', grade='first') }}" class="btn btn-primary"> Evaluate </a>
+                    </div>
+                </div>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='second')}}">detalis</a>
-            <a href="{{url_for('create_session', grade='second')}}">craete session</a>
-        </div>
-        <div class="third">
-            third Grade
-            <div class="brief">
-                all the students in the third grade {{student_third}}
-                all session in the third grade {{session_third}}
+            <div class="col-md-8 mt-5">
+                <div class="card h-100"> <!-- Added 'h-100' class to make the card full height -->
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title">Second Grade</h5>
+                        <div class="brief">
+                            <p>All students in the second grade: {{ student_second }}</p>
+                            <p>All sessions in the second grade: {{ session_second }}</p>
+                        </div>
+                        <a href="{{ url_for('dashboard_grade', grade='second') }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('create_session', grade='second') }}" class="btn btn-secondary">Create Session</a>
+                        <a href="/" class="btn btn-primary"> Evaluate </a>
+
+                    </div>
+                </div>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='third')}}">detalis</a>
-            <a href="{{url_for('create_session', grade='third')}}">craete session</a>
+            <div class="col-md-8 mt-5">
+                <div class="card h-100"> <!-- Added 'h-100' class to make the card full height -->
+                    <div class="card-body justify-content-center">
+                        <h5 class="card-title">Third Grade</h5>
+                        <div class="brief">
+                            <p>All students in the third grade: {{ student_third }}</p>
+                            <p>All sessions in the third grade: {{ session_third }}</p>
+                        </div>
+                        <a href="{{ url_for('dashboard_grade', grade='third') }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('create_session', grade='third') }}" class="btn btn-secondary">Create Session</a>
+                        <a href="/" class="btn btn-primary"> Evaluate </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

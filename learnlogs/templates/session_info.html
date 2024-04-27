@@ -1,8 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h1>Session title: {{session.title}}</h1>
-    <form method="POST">
-        <div>
-            descriptio: <br> <strong>{{session.description}}</strong>
+    <div class="container">
+        <h1 class="mb-4">Session Title: {{ session.title }}</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Description</h5>
+                <p class="card-text">{{ session.description }}</p>
+            </div>
         </div>
+    </div>
 {% endblock %}

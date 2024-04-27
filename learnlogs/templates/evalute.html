@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">Create Session</h1>
+        <h2>Grade: {{ session.grade }}</h2>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <fieldset class="mt-4">
+                <legend>Quiz Information</legend>
+                <div class="form-group">
+                    <label for="quiz_full_mark">Quiz Full Mark:</label>
+                    {{ form.quiz_full_mark(size=5, class="form-control") }}
+                </div>
+                {% for student, student_form in zip(students, form.students_list) %}
+                    <div class="form-group">
+                        <h3>Student {{ student.student_name }}</h3>
+                        <label for="{{ student_form.quiz_mark.id }}">Quiz Mark for {{ student_form.absent.label.text }}:</label>
+                        {{ student_form.absent(class="form-check-input") }}
+                        {{ student_form.quiz_mark(size=5, class="form-control") }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <button type="submit" class="btn btn-primary mt-4">{{ form.submit.label }}</button>
+        </form>
+    </div>
+{% endblock %}
