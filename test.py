@@ -28,7 +28,7 @@ with app.app_context():
     session_third1 = Session(title='quntam mechanics', description='bla bla', grade='third')
     session_third2 = Session(title='quntam dynamics', description='bla bla', grade='third')
 
-    db.session.add_all([saad, umar, bor3y, hazems, khalil, abdo, swefy, hoda,
+    db.session.add_all([saad, umar, bor3y, hazems, khalil, abdo, swefy, hoda, youssef, teacher,
                          session_first1, session_first2, session_first3,
                            session_second1, session_second2, session_third1, session_third2])
     db.session.commit()
