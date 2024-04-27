@@ -5,7 +5,7 @@
         {% for student in students %}
             <div class="student">
                 <div class="student-name">
-                    <p>student name is :{{all_students[student.id][0]['student_name']}} - and his marks precentage is:{{ all_students[student.id][0]['precentage'] }}% - and his attendace is:{{(all_students[student.id][0]['attendance']|length / sessions|length) * 100}}%</p>
+                    <p>student name is :{{all_students[student.id][0]['student_name']}} - and his marks precentage is:{{ all_students[student.id][0]['precentage'] }}% - and his attendace is:{{(all_students[student.id][0]['attendance']|length / sessions|length) * 100}}% <a href="{{url_for('profile', id=student.id)}}">details</a> </p>
                 </div>
             </div>
         {% endfor %}

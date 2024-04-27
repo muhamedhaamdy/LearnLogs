@@ -4,7 +4,9 @@
     <h2>Here are your logs:</h2>
     <ul>
         {% for session in sessions %}
-            <li>session:{{session.id}} his attendacne 
+            <li>
+                <a href="{{ url_for('session_info_for_student', id=session.id) }}"> session: {{ session.id }} </a>
+                his attendacne 
                 {% if session in attended %}
                     True
                 {% else %}

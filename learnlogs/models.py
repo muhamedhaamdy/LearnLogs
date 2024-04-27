@@ -31,6 +31,9 @@ class Student(db.Model, UserMixin):
 
 class Session(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
+    attachment_link = db.Column(db.String(100))
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     grade = db.Column(db.String(10), nullable=False)
     students = db.relationship('Student', secondary=Student_Session, backref='sessions')

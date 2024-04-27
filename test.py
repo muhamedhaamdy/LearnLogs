@@ -8,22 +8,25 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    saad = Student(student_name='saad', email='saad@elsheko.com', password='password', student_phone='12345678901', parent_name='saad parent', parent_phone='12345678901', address='saad address', grade='first')
-    umar = Student(student_name='umar', email='umar@elsheko.com', password='password', student_phone='12345678901', parent_name='umar parent', parent_phone='12345678901', address='umar address', grade='second')
-    bor3y = Student(student_name='bor3y', email='bor3y@elsheko.com', password='password', student_phone='12345678901', parent_name='bor3y parent', parent_phone='12345678901', address='bor3y address', grade='first')
-    hazems = Student(student_name='hazems', email='hazme@elsheko.com', password='password', student_phone='12345678901', parent_name='hazems parent', parent_phone='12345678901', address='hazems address', grade='third')
-    khalil = Student(student_name='khalil', email='khalil@elsheko.com', password='password', student_phone='12345678901', parent_name='khalil parent', parent_phone='12345678901', address='khalil address', grade='first')
-    abdo = Student(student_name='abdo', email='abdo@elsheko.com', password='password', student_phone='12345678901', parent_name='abdo parent', parent_phone='12345678901', address='abdo address', grade='second')
-    swefy = Student(student_name='swefy', email='swefy@mirna.com', password='password', student_phone='12345678901', parent_name='swefy parent', parent_phone='12345678901', address='swefy address', grade='first')
-    hoda = Student(student_name='hoda', email='hoda@elsheko.com', password='password', student_phone='12345678901', parent_name='swefy parent', parent_phone='12345678901', address='hoda address', grade='third')
-    
-    session_first1 = Session(grade='first')
-    session_first2 = Session(grade='first')
-    session_first3 = Session(grade='first')
-    session_second1 = Session(grade='second')
-    session_second2 = Session(grade='second')
-    session_third1 = Session(grade='third')
-    session_third2 = Session(grade='third')
+    saad = Student(student_name='saad', email='saad@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='saad parent', parent_phone='12345678901', address='saad address', grade='first')
+    umar = Student(student_name='umar', email='umar@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='umar parent', parent_phone='12345678901', address='umar address', grade='second')
+    bor3y = Student(student_name='bor3y', email='bor3y@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='bor3y parent', parent_phone='12345678901', address='bor3y address', grade='first')
+    hazems = Student(student_name='hazems', email='hazme@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='hazems parent', parent_phone='12345678901', address='hazems address', grade='third')
+    khalil = Student(student_name='khalil', email='khalil@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='khalil parent', parent_phone='12345678901', address='khalil address', grade='first')
+    abdo = Student(student_name='abdo', email='abdo@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='abdo parent', parent_phone='12345678901', address='abdo address', grade='second')
+    swefy = Student(student_name='swefy', email='swefy@mirna.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='swefy parent', parent_phone='12345678901', address='swefy address', grade='first')
+    hoda = Student(student_name='hoda', email='hoda@elsheko.com', password='pas$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBOsword', student_phone='12345678901', parent_name='swefy parent', parent_phone='12345678901', address='hoda address', grade='third')
+    youssef = Student(student_name='youssef', email='yousssef@elwakil.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='salah', parent_phone='12345678901', address='youssef address', grade='second')
+    teacher = Student(student_name='teacher', email='teacher@elsheko.com', password='$2b$12$4HKAnkwr1uqmtbLsZsNHleYLAspcYhmx3ZEAr8AequRzFnY21MUBO', student_phone='12345678901', parent_name='teacher parent', parent_phone='12345678901', address='teacher address', grade='first')
+
+
+    session_first1 = Session(title='Newton first law', description='bla bla', grade='first')
+    session_first2 = Session(title='Newton second law', description='bla bla', grade='first')
+    session_first3 = Session(title='Newton third law', description='bla bla', grade='first')
+    session_second1 = Session(title='Pythagoras law', description='bla bla', grade='second')
+    session_second2 = Session(title='Euclid law', description='bla bla', grade='second')
+    session_third1 = Session(title='quntam mechanics', description='bla bla', grade='third')
+    session_third2 = Session(title='quntam dynamics', description='bla bla', grade='third')
 
     db.session.add_all([saad, umar, bor3y, hazems, khalil, abdo, swefy, hoda,
                          session_first1, session_first2, session_first3,
@@ -38,7 +41,7 @@ with app.app_context():
     student_session_entry6 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first3.id, mark=10)
     student_session_entry7 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second1.id, mark=10)
     student_session_entry8 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second2.id, mark=10)
-    student_session_entry9 = Student_Session.insert().values(student_id=bor3y.id, session_id=session_second1.id, mark=5)
+    student_session_entry9 = Student_Session.insert().values(student_id=bor3y.id, session_id=session_first1.id, mark=5)
     student_session_entry10 = Student_Session.insert().values(student_id=hazems.id, session_id=session_third2.id, mark=6)
 
     db.session.execute(student_session_entry1)

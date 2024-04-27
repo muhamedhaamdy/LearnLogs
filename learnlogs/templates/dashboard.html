@@ -8,7 +8,7 @@
                 all session in the first grade {{session_first}}
             </div>
             <a href="{{url_for('dashboard_grade', grade='first')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
+            <a href="{{url_for('create_session', grade='first')}}">craete session</a>
         </div>
         <div class="second">
             second Grade
@@ -17,7 +17,7 @@
                 all session in the second grade {{session_second}}
             </div>
             <a href="{{url_for('dashboard_grade', grade='second')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
+            <a href="{{url_for('create_session', grade='second')}}">craete session</a>
         </div>
         <div class="third">
             third Grade
@@ -26,7 +26,7 @@
                 all session in the third grade {{session_third}}
             </div>
             <a href="{{url_for('dashboard_grade', grade='third')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
+            <a href="{{url_for('create_session', grade='third')}}">craete session</a>
         </div>
     </div>
 {% endblock content %}

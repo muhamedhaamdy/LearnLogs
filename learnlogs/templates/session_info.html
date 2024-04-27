@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1>Session title: {{session.title}}</h1>
+    <form method="POST">
+        <div>
+            descriptio: <br> <strong>{{session.description}}</strong>
+        </div>
+{% endblock %}
