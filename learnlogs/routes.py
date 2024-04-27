@@ -9,10 +9,10 @@ from flask_login import login_user, current_user, logout_user, login_required
 from learnlogs.data import get_by_grade
 
 
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def home():
-    return render_template('home.html', title='Home')
+    return render_template('home.html')
 
 @app.route("/enroll", methods=['GET', 'POST'])
 def enroll():
