@@ -237,8 +237,8 @@ body {
 }
 
 #footer .footer-bottom {
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   color: #fff;
 }
 
@@ -270,4 +270,8 @@ body {
   #footer .credits {
     padding-top: 4px;
   }
+}
+
+.link-copyright{
+  color: #fff;
 }
