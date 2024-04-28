@@ -1,21 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Welcome {{ student.student_name }}</h1>
-    <h2>Here are your logs:</h2>
-    <ul>
-        {% for session in sessions %}
-            <li>session:{{session.id}} his attendacne 
-                {% if session in attended %}
-                    True
-                {% else %}
-                    False
-                {% endif %}
-                {% for mark in marks %}
-                    {% if mark.session_id == session.id %}
-                        | Mark: {{ mark.mark }}
-                    {% endif %}
-                {% endfor %}
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Welcome {{ student.student_name }}</h1>
+        <p class="text-secondary">{{ current_user.email }}</p>
+        <h2>Here are your logs:</h2>
+        <ul class="list-group">
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img mr-3" src="../static/images/{{ current_user.photo_link }}" alt="User Photo">
+                    <div class="media-body">
+                        {% for session in sessions %}
+                            <li class="list-group-item">
+                                <a href="{{ url_for('session_info_for_student', id=session.id) }}">Session: {{ session.id }}</a>
+                                Attendance: {% if session in attended %}True{% else %}False{% endif %}
+                                {% for mark in marks %}
+                                    {% if mark.session_id == session.id %}
+                                        | Mark: {{ mark.mark }}
+                                    {% endif %}
+                                {% endfor %}
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
 {% endblock content %}

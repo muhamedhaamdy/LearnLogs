@@ -3,16 +3,14 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from learnlogs import app, db, bcrypt
-from learnlogs.forms import EnrollForm, LoginForm, QuizForm, Submit_Student_mark
+from learnlogs.forms import EnrollForm, LoginForm, Submit_Student_mark, SessionForm
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
 from learnlogs.data import get_by_grade
 
 
-
-
-@app.route("/")
-@app.route("/home")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/home", methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
 
@@ -65,10 +63,11 @@ def dashboard():
             session_first = len(Session.query.filter_by(grade='first').all())
             session_second = len(Session.query.filter_by(grade='second').all())
             session_third = len(Session.query.filter_by(grade='third').all())
+
             return render_template('dashboard.html', student_first=student_first, 
                                 student_second=student_second, student_third=student_third, 
                                 session_first=session_first, session_second=session_second, 
-                                session_third=session_third)
+                                session_third=session_third, title='Dashboard')
         else :
             return "this page is only for teacher", 403
     else:
@@ -82,7 +81,9 @@ def dashboard_grade(grade):
                 all_data = get_by_grade(grade)
                 students = Student.query.filter_by(grade=grade).all() 
                 session = Session.query.filter_by(grade=grade).all()
-                return render_template('dashboard_grade.html', all_students=all_data, students=students, sessions=session)
+                return render_template('dashboard_grade.html', all_students=all_data, 
+                                       students=students, sessions=session, 
+                                       title='dashboard_grade')
         else:
             return "Unauthorized access", 403
     else:
@@ -99,22 +100,22 @@ def profile(id):
             student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
             if student:
                 return render_template('student_profile.html', student=student,
-                                    marks=student_marks, attended=student_attended, sessions=all_session)
+                                    marks=student_marks, attended=student_attended,
+                                      sessions=all_session, title='Profile')
         else :
             return "you can only view your profile", 403
     else:
         return "you can only view your profile", 403
+
 @login_required
 @app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
-
-def create_session(grade):
+def evaluate(grade):
     if current_user.is_authenticated:
         if current_user.email==('teacher@elsheko.com'):
             students = Student.query.filter_by(grade=grade).all()
             
             form = Submit_Student_mark()
             new_session = Session(grade=grade)
-
             if form.validate_on_submit():
                 db.session.add(new_session)
                 db.session.commit()
@@ -131,20 +132,48 @@ def create_session(grade):
             else:
                 print("Form validation failed!")
                 print(form.errors)
-        return render_template('create_session.html', form=form, session=new_session, students=students)
+        return render_template('evalute.html', form=form, session=new_session, 
+                               students=students, title='create_session')
     else:
         return "Unauthorized access", 403
-    
+
+@app.route('/session/<string:grade>', methods=['GET', 'POST'])
+def create_session(grade):
+    if current_user.is_authenticated:
+        if current_user.email==('teacher@elsheko.com'):
+            form = SessionForm()
+            if form.validate_on_submit():
+                session = Session(title=form.title.data, 
+                                  description=form.description.data,
+                                    attachment_link=form.attachment_link.data,
+                                      grade=grade)
+                db.session.add(session)
+                db.session.commit()
+                return redirect(url_for('dashboard_grade', grade=grade))
+            else:
+                print("Form validation failed!")
+                print(form.errors)
+            return render_template('session_info_form.html', form=form, title='session_info_form')
+        else:
+            return "Unauthorized access", 403
+        
+@app.route('/session/<int:id>', methods=['GET', 'POST'])
+def session_info_for_student(id):
+    if current_user.is_authenticated:
+        session = Session.query.filter_by(id=id).first()
+        return render_template('session_info.html', session=session, title='session_info')
+    else:
+        return "Unauthorized access", 403
+
 @login_required
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('home'))
-
+    return redirect(url_for('login'))
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
+    _, f_ext = os.path.splitext(form_picture.photo_link)
     picture_fn = random_hex + f_ext
     picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
 
@@ -152,7 +181,6 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
-
     return picture_fn
 
 """

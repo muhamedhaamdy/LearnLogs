@@ -24,8 +24,8 @@ class EnrollForm(FlaskForm):
     address = StringField('Address',
                            validators=[DataRequired()])
     photo_link = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-    grade = SelectField('Grade', choices=[('first', 'first'), 
-                                          ('second', 'second'), ('third', 'third')], validators=[InputRequired()])
+    grade = SelectField('Grade', choices=[('first', 'First'), 
+                                          ('second', 'Second'), ('third', 'Third')], validators=[InputRequired()])
 
     enroll = SubmitField('enroll')
     def validate_email(self, email):
@@ -47,6 +47,14 @@ class Submit_Student_mark(FlaskForm):
     quiz_full_mark = IntegerField('Quiz Full Mark', validators=[InputRequired(), NumberRange(min=0, max=100)])
     students_list = FieldList(FormField(QuizForm),min_entries=1000)
     submit = SubmitField('Submit')
+
+class SessionForm(FlaskForm):
+    title = StringField('Session Title', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    attachment_link = FileField('Add Attachment', validators=[FileAllowed(['pdf', 'docx', 'pptx'])])
+    submit = SubmitField('Submit')
+
+
 
 
     # def validate_quiz_mark(self, quiz_mark):

@@ -1,32 +1,87 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="container">
-        <div class="first">
-            First Grade
-            <div class="brief">
-                all the students in the first grade {{student_first}}
-                all session in the first grade {{session_first}}
+    <div class="container mt-5 mb-3">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0">First Grade</h6> 
+                            </div>
+                        </div>
+                    </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{(student_first/50)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">{{ student_first }} Students Applied <span class="text2">of 50 capacity</span></span> </div>
+                        
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{(session_first/10)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <div class="mt-3"> <span class="text1">{{ session_first }} Sessions Applied <span class="text2">of 10 capacity</span></span> </div>
+                        <a href="{{ url_for('dashboard_grade', grade='first') }}" class="btn btn-primary">Details</a>
+                        <a href="{{ url_for('create_session', grade='first') }}" class="btn btn-secondary">Create Session</a>
+                        <a href="{{ url_for('evaluate', grade='first') }}" class="btn btn-primary"> Evaluate </a>
+                </div>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='first')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
-        </div>
-        <div class="second">
-            second Grade
-            <div class="brief">
-                all the students in the second grade {{student_second}}
-                all session in the second grade {{session_second}}
+
+
+            
+            <div class="col-md-4">
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0">Second Grade</h6> 
+                            </div>
+                        </div>
+                    </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{(student_first/50)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3"> <span class="text1">{{ student_second }} Students Applied <span class="text2">of 50 capacity</span></span> </div>
+                            
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{(session_first/10)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3"> <span class="text1">{{ session_second }} Sessions Applied <span class="text2">of 10 capacity</span></span> </div>
+                            <a href="{{ url_for('dashboard_grade', grade='second') }}" class="btn btn-primary">Details</a>
+                            <a href="{{ url_for('create_session', grade='second') }}" class="btn btn-secondary">Create Session</a>
+                            <a href="{{ url_for('evaluate', grade='second') }}" class="btn btn-primary"> Evaluate </a>
+                </div>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='second')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
-        </div>
-        <div class="third">
-            third Grade
-            <div class="brief">
-                all the students in the third grade {{student_third}}
-                all session in the third grade {{session_third}}
+
+
+            <div class="col-md-4">
+                <div class="card p-3 mb-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="icon"> <i class="bx bxl-mailchimp"></i> </div>
+                            <div class="ms-2 c-details">
+                                <h6 class="mb-0">Third Grade</h6> 
+                            </div>
+                        </div>
+                    </div>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{(student_third/50)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3"> <span class="text1">{{ student_third }} Students Applied <span class="text2">of 50 capacity</span></span> </div>
+                            
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: {{(session_third/10)*100}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="mt-3"> <span class="text1">{{ session_third }} Sessions Applied <span class="text2">of 10 capacity</span></span> </div>
+                            <a href="{{ url_for('dashboard_grade', grade='third') }}" class="btn btn-primary">Details</a>
+                            <a href="{{ url_for('create_session', grade='third') }}" class="btn btn-secondary">Create Session</a>
+                            <a href="{{ url_for('evaluate', grade='third') }}" class="btn btn-primary"> Evaluate </a>
+                </div>
             </div>
-            <a href="{{url_for('dashboard_grade', grade='third')}}">detalis</a>
-            <a href="{{url_for('home')}}">craete session</a>
+
+
         </div>
     </div>
 {% endblock content %}

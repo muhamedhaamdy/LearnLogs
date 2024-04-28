@@ -88,3 +88,6 @@ with app.app_context():
     student_session_entry1 = Student_Session.insert().values(student_id=saad.id, session_id=session1.id, mark=7)
     وتكتب الدرحه اللي عايزها في القيمه اللي هتتحط في الجدول
 '''
+#https://github.com/StartBootstrap/startbootstrap-landing-page
+#https://github.com/zuramai/mazer?tab=readme-ov-file
+#https://github.com/mdbootstrap/bootstrap-5-admin-template/
