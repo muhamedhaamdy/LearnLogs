@@ -145,6 +145,7 @@ def create_session(grade):
                 session = Session(title=form.title.data, 
                                   description=form.description.data,
                                     attachment_link=form.attachment_link.data,
+                                    video_link = form.video_link.data,
                                       grade=grade)
                 db.session.add(session)
                 db.session.commit()
