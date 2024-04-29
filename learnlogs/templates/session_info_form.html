@@ -1,34 +1,22 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2">
-        <div class="card container">
-            <div class="card-header title-create-session">
-                <h1 class="text-body-emphasis">Create A New Session</h1>
+    <div class="container">
+        <h2>Session Information</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                <label for="title" class="form-control-label">Title</label>
+                {{ form.title(class="form-control", id="title") }}
             </div>
-            <div class="card-body">
-                <form method="POST">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        <label for="title" class="form-control-label">Title</label>
-                        {{ form.title(class="form-control", id="title") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="form-control-label">Description</label>
-                        {{ form.description(class="form-control", id="description") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="attachment_link" class="form-control-label">Attachment Link</label>
-                        {{ form.attachment_link(class="form-control", id="attachment_link") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="video_link" class="form-control-label">Video Link</label>
-                        {{ form.video_link(class="form-control", id="video_link") }}
-                    </div>
-                    <button type="submit" class="btn btn-primary btm-submit">Submit</button>
-                </form>
+            <div class="form-group">
+                <label for="description" class="form-control-label">Description</label>
+                {{ form.description(class="form-control", id="description") }}
             </div>
-
-        </div>
+            <div class="form-group">
+                <label for="attachment_link" class="form-control-label">Attachment Link</label>
+                {{ form.attachment_link(class="form-control", id="attachment_link") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 {% endblock %}
-

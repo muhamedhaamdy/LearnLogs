@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Evaluate Session</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-8">
+                <div class="card-body">
+                    <h2>{{sessions.grade}} Grade</h2>
+                    {% for session in sessions %}
+                    {% if session.id in session_ids %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Session: {{ session.id }}</h5>
+                                <p class="card-text">{{ session.title }}</p>
+                                <small>Alerady Evaluated</small>
+                            </div>
+                        </div>
+                    {% else %}
+                        <a href="{{ url_for('evaluate', grade=session.grade, id=session.id) }}" class="card-link">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">Session: {{ session.id }}</h5>
+                                    <p class="card-text">{{ session.title }}</p>
+                                </div>
+                            </div>
+                        </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

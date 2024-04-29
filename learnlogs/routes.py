@@ -107,21 +107,35 @@ def profile(id):
         return "you can only view your profile", 403
 
 @login_required
-@app.route('/create_session/<string:grade>', methods=['GET', 'POST'])
-def evaluate(grade):
+@app.route('/envaluate/<string:grade>', methods=['GET', 'POST'])
+def envaluate_session(grade):
+    if current_user.is_authenticated:
+        if current_user.email==('teacher@elsheko.com'):
+            all_sessions = Session.query.filter_by(grade=grade).all()
+            all_data = db.session.query(Student_Session).all()
+            all_session_created = []
+            for info in all_data:
+                all_session_created.append(info.session_id)             
+            return render_template('evaluate_session.html',
+                                   sessions=all_sessions, session_ids=all_session_created
+                                   ,title='envaluate')
+        else:
+            return "Unauthorized access", 403
+    else:
+        return "Unauthorized access", 403
+
+@login_required
+@app.route('/evaluate/<string:grade>/<int:id>', methods=['GET', 'POST'])
+def evaluate(grade, id):
     if current_user.is_authenticated:
         if current_user.email==('teacher@elsheko.com'):
             students = Student.query.filter_by(grade=grade).all()
-            
             form = Submit_Student_mark()
-            new_session = Session(grade=grade)
             if form.validate_on_submit():
-                db.session.add(new_session)
-                db.session.commit()
                 for student, student_form in zip(students, form.students_list):
                     student_session_entry = Student_Session.insert().values(
                         student_id=student.id,
-                        session_id=new_session.id,
+                        session_id=id,
                         mark=student_form.quiz_mark.data,
                         full_mark=form.quiz_full_mark.data
                     )
@@ -131,7 +145,7 @@ def evaluate(grade):
             else:
                 print("Form validation failed!")
                 print(form.errors)
-        return render_template('evalute.html', form=form, session=new_session, 
+        return render_template('evalute.html', form=form, 
                                students=students, title='create_session')
     else:
         return "Unauthorized access", 403
@@ -145,7 +159,6 @@ def create_session(grade):
                 session = Session(title=form.title.data, 
                                   description=form.description.data,
                                     attachment_link=form.attachment_link.data,
-                                    video_link = form.video_link.data,
                                       grade=grade)
                 db.session.add(session)
                 db.session.commit()

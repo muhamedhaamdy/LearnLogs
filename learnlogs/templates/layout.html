@@ -7,14 +7,13 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
 
-    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/main.css">
     {% if title %}
       <title>LearnLogs - {{ title }}</title>
       {% if title == 'Home' %}
         <link rel="stylesheet" href="../static/styles/home.css">      
-      {% elif title == 'Dashboard' %}
+      {% elif title == 'dashboard' %}
         <link rel="stylesheet" href="../static/styles/dashboard.css">
       {% elif title == 'dashboard_grade' %}
         <link rel="stylesheet" href="../static/styles/dashboard_grade.css">
@@ -30,8 +29,6 @@
         <link rel="stylesheet" href="../static/styles/session_grade.css">
       {% elif title == 'session_id' %}
         <link rel="stylesheet" href="../static/styles/session_id.css">
-      {% elif title == 'session_info_form' %}
-        <link rel="stylesheet" href="../static/styles/session_info_form.css">
       {% endif %}
     {% else %}
         <title>Flask Blog</title>
@@ -93,7 +90,7 @@
             <!-- You can delete the links only if you purchased the pro version. -->
             <!-- Licensing information: https://bootstrapmade.com/license/ -->
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-            Designed by <a class="link-copyright" href="https://www.facebook.com/ana.messi.372">learnlogs team</a>
+            Designed by <a href="https://www.facebook.com/ana.messi.372">learnlogs team</a>
           </div>
         </div>
       </footer><!-- End Footer -->

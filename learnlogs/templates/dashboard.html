@@ -15,7 +15,7 @@
                         </div>
                         <a href="{{ url_for('dashboard_grade', grade='first') }}" class="btn btn-primary">Details</a>
                         <a href="{{ url_for('create_session', grade='first') }}" class="btn btn-secondary">Create Session</a>
-                        <a href="{{ url_for('evaluate', grade='first') }}" class="btn btn-primary"> Evaluate </a>
+                        <a href="{{ url_for('envaluate_session', grade='first') }}" class="btn btn-primary">Eavluate</a>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,7 @@
                         </div>
                         <a href="{{ url_for('dashboard_grade', grade='second') }}" class="btn btn-primary">Details</a>
                         <a href="{{ url_for('create_session', grade='second') }}" class="btn btn-secondary">Create Session</a>
-                        <a href="/" class="btn btn-primary"> Evaluate </a>
-
+                        <a href="{{ url_for('envaluate_session', grade='second') }}" class="btn btn-primary">Eavluate</a>
                     </div>
                 </div>
             </div>
@@ -44,7 +43,7 @@
                         </div>
                         <a href="{{ url_for('dashboard_grade', grade='third') }}" class="btn btn-primary">Details</a>
                         <a href="{{ url_for('create_session', grade='third') }}" class="btn btn-secondary">Create Session</a>
-                        <a href="/" class="btn btn-primary"> Evaluate </a>
+                        <a href="{{ url_for('envaluate_session', grade='third') }}" class="btn btn-primary">Eavluate</a>
                     </div>
                 </div>
             </div>
