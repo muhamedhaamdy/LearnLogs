@@ -34,6 +34,7 @@ class Session(db.Model, UserMixin):
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     attachment_link = db.Column(db.String(100))
+    video_link = db.Column(db.String(100), default='default.mp4')
     date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     grade = db.Column(db.String(10), nullable=False)
     students = db.relationship('Student', secondary=Student_Session, backref='sessions')
