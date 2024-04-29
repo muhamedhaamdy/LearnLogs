@@ -7,3 +7,8 @@
   .btm-submit {
     border-radius: .50rem;
   }
+
+  .card-create-session{
+    margin-bottom: 100px;
+    padding-bottom: 10px;
+  }

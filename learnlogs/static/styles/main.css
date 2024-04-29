@@ -275,3 +275,11 @@ transition: 0.3s;
 .link-copyright{
 color: #fff;
 }
+
+.footer-main{
+  position: fixed;
+  width: 100%;
+  bottom: 0; 
+  left: 0; 
+  z-index: 10;
+}

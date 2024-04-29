@@ -1,107 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		
 
-    <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
-    {% if title %}
-      <title>LearnLogs - {{ title }}</title>
-      {% if title == 'Home' %}
-        <link rel="stylesheet" href="../static/styles/home.css">      
-      {% elif title == 'Dashboard' %}
-        <link rel="stylesheet" href="../static/styles/dashboard.css">
-      {% elif title == 'dashboard_grade' %}
-        <link rel="stylesheet" href="../static/styles/dashboard_grade.css">
-      {% elif title == 'login' %}
-        <link rel="stylesheet" href="../static/styles/login.css">
-      {% elif title == 'enroll' %}
-        <link rel="stylesheet" href="../static/styles/enroll.css">
-      {% elif title == 'create_session' %}
-        <link rel="stylesheet" href="../static/styles/create_session.css">
-      {% elif title == 'profile' %}
-        <link rel="stylesheet" href="../static/styles/profile.css">
-      {% elif title == 'session_grade' %}
-        <link rel="stylesheet" href="../static/styles/session_grade.css">
-      {% elif title == 'session_id' %}
-        <link rel="stylesheet" href="../static/styles/session_id.css">
-      {% elif title == 'session_info_form' %}
-        <link rel="stylesheet" href="../static/styles/session_info_form.css">
-      {% endif %}
-    {% else %}
-        <title>Flask Blog</title>
-    {% endif %}
+		<link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+		{% if title %}
+			<title>LearnLogs - {{ title }}</title>
+			{% if title == 'Home' %}
+				<link rel="stylesheet" href="../static/styles/home.css">      
+			{% elif title == 'Dashboard' %}
+				<link rel="stylesheet" href="../static/styles/dashboard.css">
+			{% elif title == 'dashboard_grade' %}
+				<link rel="stylesheet" href="../static/styles/dashboard_grade.css">
+			{% elif title == 'login' %}
+				<link rel="stylesheet" href="../static/styles/login.css">
+			{% elif title == 'enroll' %}
+				<link rel="stylesheet" href="../static/styles/enroll.css">
+			{% elif title == 'create_session' %}
+				<link rel="stylesheet" href="../static/styles/create_session.css">
+			{% elif title == 'profile' %}
+				<link rel="stylesheet" href="../static/styles/profile.css">
+			{% elif title == 'session_grade' %}
+				<link rel="stylesheet" href="../static/styles/session_grade.css">
+			{% elif title == 'session_id' %}
+				<link rel="stylesheet" href="../static/styles/session_id.css">
+			{% elif title == 'session_info_form' %}
+				<link rel="stylesheet" href="../static/styles/session_info_form.css">
+			{% elif title == 'session_info' %}
+				<link rel="stylesheet" href="../static/styles/session_info.css">
+			{% endif %}
+		{% else %}
+				<title>Flask Blog</title>
+		{% endif %}
 </head>
 <body>
-    <header class="site-header">
-    </header>
-    <main role="main" class="container">
-      <div class="row justify-content-center h-1000">
-        <div class="col-md-8">
-          {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-          <header class="site-header">
-            <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-              <div class="container">
-                <a class="navbar-brand mr-4" href="/"><em><strong>LearnLogs</strong></em></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                  <div class="navbar-nav mr-auto">
-                    {% if title != 'Home' %}
-                    <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                    {% endif %}
-                  </div>
-                  <!-- Navbar Right Side -->
-                  <div class="navbar-nav">
-                    {% if current_user.is_authenticated %}
-                      <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    {% else %}
-                      <a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-                      <a class="nav-item nav-link" href="{{ url_for('enroll') }}">enroll</a>
-                    {% endif %}
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </header>
-          {% block content %}{% endblock %}
-        </div>
-      </div>
-        <!-- ======= Footer ======= -->
-      </main>
-      <footer id="footer" class="h-20">
-        <div class="container footer-bottom clearfix">
-          <div class="copyright">
-            &copy; Copyright <strong><span>LEARNLOGS</span></strong>. All Rights Reserved
-          </div>
-          <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-            Designed by <a class="link-copyright" href="https://www.facebook.com/ana.messi.372">learnlogs team</a>
-          </div>
-        </div>
-      </footer><!-- End Footer -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../static/scripts/main.js"></script>
+	<div class="d-flex flex-column">
+				<header class="site-header">
+				</header>
+				<main role="main" class="container mb-auto">
+					<div class="row justify-content-center h-1000 ">
+						<div class="col-md-8">
+							{% with messages = get_flashed_messages(with_categories=true) %}
+								{% if messages %}
+									{% for category, message in messages %}
+										<div class="alert alert-{{ category }}">
+											{{ message }}
+										</div>
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
+							<header class="site-header">
+								<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+									<div class="container">
+										<a class="navbar-brand mr-4" href="/"><em><strong>LearnLogs</strong></em></a>
+										<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+											<span class="navbar-toggler-icon"></span>
+										</button>
+										<div class="collapse navbar-collapse" id="navbarToggle">
+											<div class="navbar-nav mr-auto">
+												{% if title != 'Home' %}
+												<a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+												{% endif %}
+											</div>
+											<!-- Navbar Right Side -->
+											<div class="navbar-nav">
+												{% if current_user.is_authenticated %}
+													<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+												{% else %}
+													<a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+													<a class="nav-item nav-link" href="{{ url_for('enroll') }}">enroll</a>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</nav>
+							</header>
+							<div class="mb-auto">
+								{% block content %}{% endblock %}
+							</div>
+
+						</div>
+					</div>
+						<!-- ======= Footer ======= -->
+					</main>
+					<footer id="footer" class="h-20 footer-main">
+						<div class="container footer-bottom clearfix">
+							<div class="copyright">
+								&copy; Copyright <strong><span>LEARNLOGS</span></strong>. All Rights Reserved
+							</div>
+							<div class="credits">
+								<!-- All the links in the footer should remain intact. -->
+								<!-- You can delete the links only if you purchased the pro version. -->
+								<!-- Licensing information: https://bootstrapmade.com/license/ -->
+								<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
+								Designed by <a class="link-copyright" href="https://www.facebook.com/ana.messi.372">learnlogs team</a>
+							</div>
+						</div>
+					</footer><!-- End Footer -->
+				<!-- Optional JavaScript -->
+				<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+				<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+				<script src="../static/scripts/main.js"></script>
+	</div>
 </body>
 </html>
