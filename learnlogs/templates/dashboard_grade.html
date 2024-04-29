@@ -8,9 +8,9 @@
                     <div class="list-group">
                         {% for student in students %}
                             <div class="list-group-item">
-                                <h5 class="mb-1">Student Name: {{ all_students[student.id][0]['student_name'] }}</h5>
-                                <p class="mb-1">Marks Percentage: {{ all_students[student.id][0]['precentage    '] }}%</p>
-                                <p class="mb-1">Attendance: {{ ((all_students[student.id][0]['attendance']|length / sessions|length) * 100)|round(2) }}%</p>
+                                <h5 class="mb-1">Student Name: {{ all_students[student.id]['student_name'] }}</h5>
+                                <p class="mb-1">Marks Percentage: {{ all_students[student.id]['precentage'] }}%</p>
+                                <p class="mb-1">Attendance: {{ ((all_students[student.id]['attendance']|length / sessions|length) * 100)|round(2) }}%</p>
                                 <a href="{{ url_for('profile', id=student.id) }}" class="btn btn-primary btn-sm">Details</a>
                             </div>
                         {% endfor %}

@@ -6,7 +6,7 @@ from learnlogs import app, db, bcrypt
 from learnlogs.forms import EnrollForm, LoginForm, Submit_Student_mark, SessionForm
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
-from learnlogs.data import get_by_grade
+from learnlogs.data import get_by_grade, get_top
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -63,10 +63,22 @@ def dashboard():
             session_first = len(Session.query.filter_by(grade='first').all())
             session_second = len(Session.query.filter_by(grade='second').all())
             session_third = len(Session.query.filter_by(grade='third').all())
-            return render_template('dashboard.html', student_first=student_first, 
+            top_student_first = get_top('first')
+            first_element = next(iter(top_student_first.items()))
+            first_value1 = first_element[1] 
+            top_student_second = get_top('second')
+            first_element = next(iter(top_student_second.items()))
+            first_value2 = first_element[1] 
+            top_student_third = get_top('third')
+            first_element = next(iter(top_student_third.items()))
+            first_value3 = first_element[1] 
+
+            return render_template('index.html', student_first=student_first, 
                                 student_second=student_second, student_third=student_third, 
                                 session_first=session_first, session_second=session_second, 
-                                session_third=session_third, title='Dashboard')
+                                session_third=session_third, 
+                                top_student_first=first_value1, top_student_second=first_value2,
+                                  top_student_third=first_value3, title='Dashboard')
         else :
             return "this page is only for teacher", 403
     else:

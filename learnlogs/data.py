@@ -17,9 +17,19 @@ def get_by_grade(grade):
             else:
                 continue
         total_mark_precision = total_mark_for_student/len(all_session) * 100        
-        all_student_data[student.id]=[{'student_name':student.student_name, 'email':student.email, 
+        all_student_data[student.id]={'student_name':student.student_name, 'email':student.email, 
                                        'grade':student.grade, 'student_phone':student.student_phone,
                                          'parent_phone': student.parent_phone, 'address':student.address,
                                            'mark':all_mark,'attendance':student.attended,
-                                             'precentage':total_mark_precision}]
+                                             'precentage':total_mark_precision}
     return all_student_data
+
+def get_top(grade):
+    all_student_data = {}
+    all_students = Student.query.filter_by(grade=grade).all()
+    all_data = get_by_grade(grade)
+    for student in all_students:
+        all_student_data[student.id]={'student_name':student.student_name, 'precentage':all_data[student.id]['precentage']}
+    all_student_data = dict(sorted(all_student_data.items(), key=lambda item: item[1]['precentage'], reverse=True))
+    return all_student_data
+
