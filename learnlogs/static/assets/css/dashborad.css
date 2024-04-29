@@ -467,3 +467,6 @@ body {
     left: initial;
   }
 }
+.hidden {
+  display: none;
+}

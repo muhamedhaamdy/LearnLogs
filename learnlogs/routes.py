@@ -73,7 +73,7 @@ def dashboard():
             first_element = next(iter(top_student_third.items()))
             first_value3 = first_element[1] 
 
-            return render_template('index.html', student_first=student_first, 
+            return render_template('dashboard.html', student_first=student_first, 
                                 student_second=student_second, student_third=student_third, 
                                 session_first=session_first, session_second=session_second, 
                                 session_third=session_third, 
@@ -179,7 +179,7 @@ def create_session(grade):
             else:
                 print("Form validation failed!")
                 print(form.errors)
-            return render_template('session_info_form.html', form=form, title='session_info_form')
+            return render_template('session_info_form.html',grade=grade, form=form, title='session_info_form')
         else:
             return "Unauthorized access", 403
         
