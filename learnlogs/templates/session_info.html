@@ -11,16 +11,14 @@
         <div class="card video-attachment">
             <div class="card-body">
                 <h5 class="card-title">Session Attachment</h5>
-                <embed src="../static/attachments/Untitled_whiteboard.pdf" width="650px" height="380px" />
-                <p class="card-text">{{ session.attachment_link }}</p>
+                <embed src="../static/attachments/{{ session.attachment_link }}" width="650px" height="380px" />
             </div>
             <div class="card-body">
                 <h5 class="card-title">Session Video</h5>
                 <video width="640" height="360" controls>
-                    <source src="../static/videos/WhatsApp Video 2024-04-29 at 16.22.11.mp4" type="video/mp4">
+                    <source src="../static/videos/{{ session.video_link }}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>                
-                <p class="card-text">{{ session.video_link }}</p>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
                 <h1 class="text-body-emphasis">Create A New Session</h1>
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="" enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
                         <label for="title" class="form-control-label">Title</label>
@@ -17,12 +17,22 @@
                         {{ form.description(class="form-control", id="description") }}
                     </div>
                     <div class="form-group">
-                        <label for="attachment_link" class="form-control-label">Attachment Link</label>
-                        {{ form.attachment_link(class="form-control", id="attachment_link") }}
+                        {{ form.attachment_link.label() }}
+                        {{ form.attachment_link(class="form-control-file", id="attachment_link") }}
+                        {% if form.attachment_link.errors %}
+                            {% for error in form.attachment_link.errors %}
+                                <span class="text-danger">{{ error }}</span></div></br>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
-                        <label for="video_link" class="form-control-label">Video Link</label>
-                        {{ form.video_link(class="form-control", id="video_link") }}
+                        {{ form.video_link.label() }}
+                        {{ form.video_link(class="form-control-file", id="video_link") }}
+                        {% if form.attachment_link.errors %}
+                            {% for error in form.video_link.errors %}
+                                    <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <button type="submit" class="btn btn-primary btm-submit">Submit</button>
                 </form>

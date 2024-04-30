@@ -51,8 +51,8 @@ class Submit_Student_mark(FlaskForm):
 class SessionForm(FlaskForm):
     title = StringField('Session Title', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
-    attachment_link = FileField('Add Attachment', validators=[FileAllowed(['pdf', 'docx', 'pptx'])])
-    video_link = FileField('Add Video', validators=[FileAllowed(['mp4', 'mov', 'avi'])])
+    attachment_link = FileField('Attachment Link', validators=[FileAllowed(['pdf', 'docx', 'pptx'])])
+    video_link = FileField('Video Link', validators=[FileAllowed(['mp4', 'mov', 'avi'])])
     submit = SubmitField('Submit')
 
 

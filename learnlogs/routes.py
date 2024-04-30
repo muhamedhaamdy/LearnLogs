@@ -156,10 +156,14 @@ def create_session(grade):
         if current_user.email==('teacher@elsheko.com'):
             form = SessionForm()
             if form.validate_on_submit():
+                if form.attachment_link.data:
+                    attachment_file = save_attachment(form.attachment_link.data)
+                if form.video_link.data:
+                    video_file = save_video(form.video_link.data)
                 session = Session(title=form.title.data, 
                                   description=form.description.data,
-                                    attachment_link=form.attachment_link.data,
-                                    video_link = form.video_link.data,
+                                    attachment_link=attachment_file,
+                                    video_link = video_file,
                                       grade=grade)
                 db.session.add(session)
                 db.session.commit()
@@ -185,17 +189,29 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-def save_picture(form_picture):
+def save_attachment(form_attachment):
     random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.photo_link)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/profile_pics', picture_fn)
+    _, f_ext = os.path.splitext(form_attachment.filename)
+    attachment_fn = random_hex + f_ext
+    attachment_path = os.path.join(app.root_path, 'static/attachments', attachment_fn)
 
-    output_size = (125, 125)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_fn
+    #output_size = (125, 125)
+    #i = Image.open(form_attachment)
+    #i.thumbnail(output_size)
+    form_attachment.save(attachment_path)
+    return attachment_fn
+
+def save_video(form_video):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_video.filename)
+    video_fn = random_hex + f_ext
+    video_path = os.path.join(app.root_path, 'static/videos', video_fn)
+
+    #output_size = (125, 125)
+    #i = Image.open(form_attachment)
+    #i.thumbnail(output_size)
+    form_video.save(video_path)
+    return video_fn
 
 """
 @app.route("/account", methods=['GET', 'POST'])
