@@ -33,3 +33,23 @@ def get_top(grade):
     all_student_data = dict(sorted(all_student_data.items(), key=lambda item: item[1]['precentage'], reverse=True))
     return all_student_data
 
+def get_list_of_student_marks(student):
+    all_grade_data = get_by_grade(student.grade)
+    student_data = all_grade_data[student.id]
+    all_session_in_same_grade = Session.query.filter_by(grade=student.grade).all()
+
+    all_session_in_same_grade_by_id = []
+    for session in all_session_in_same_grade:
+        all_session_in_same_grade_by_id.append(session.id)
+
+    student_mark = []
+    for mark in student_data['mark']:
+        if mark['session'] in all_session_in_same_grade_by_id:
+            student_mark.append(mark['mark'] / mark['full_mark'])
+        else:
+            student_mark.append(0)
+
+    # Make the length of student_mark equal to 10
+    student_mark.extend([0] * (10 - len(student_mark)))
+    
+    return student_mark

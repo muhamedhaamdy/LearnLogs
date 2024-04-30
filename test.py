@@ -1,7 +1,7 @@
 from learnlogs import app, db
 from sqlalchemy import select
 from learnlogs.models import Session, Student, Student_Session
-from learnlogs.data import get_by_grade, get_top
+from learnlogs.data import get_by_grade, get_top,get_list_of_student_marks
 
 
 with app.app_context():
@@ -57,10 +57,19 @@ with app.app_context():
 
     db.session.commit()
 
-    top = get_top('first')
-    first_element = next(iter(top.items()))
-    first_value = first_element[1] 
-    print(first_value['precentage'])
+    # top = get_top('first')
+    # first_element = next(iter(top.items()))
+    # first_value = first_element[1] 
+    # print(first_value['precentage'])
+
+    mark1 = get_list_of_student_marks(saad)
+    print(mark1)
+    mark2 = get_list_of_student_marks(umar)
+    print(mark2)
+    mark3 = get_list_of_student_marks(bor3y)
+    print(mark3)
+
+
 '''
     all_students_first = Student.query.filter_by(grade='first').all()
     all_students_second = Student.query.filter_by(grade='second').all()

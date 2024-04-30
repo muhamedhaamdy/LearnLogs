@@ -6,7 +6,7 @@ from learnlogs import app, db, bcrypt
 from learnlogs.forms import EnrollForm, LoginForm, Submit_Student_mark, SessionForm
 from learnlogs.models import Student, Session, Student_Session
 from flask_login import login_user, current_user, logout_user, login_required
-from learnlogs.data import get_by_grade, get_top
+from learnlogs.data import get_by_grade, get_top,get_list_of_student_marks
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -48,7 +48,7 @@ def login():
         student = Student.query.filter_by(email=form.email.data).first()
         if student and bcrypt.check_password_hash(student.password, form.password.data):
             login_user(student, remember=False)
-            return redirect(url_for('profile', id=student.id))
+            return redirect(url_for('profile1', id=student.id))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
@@ -101,8 +101,8 @@ def dashboard_grade(grade):
         return "Unauthorized access", 403  
 
 @login_required
-@app.route('/profile/<int:id>', methods=['GET', 'POST'])
-def profile(id):
+@app.route('/profile1/<int:id>', methods=['GET', 'POST'])
+def profile1(id):
     if current_user.is_authenticated :
         if current_user.id == id or current_user.email==('teacher@elsheko.com') :
             student = Student.query.filter_by(id=id).first()
@@ -110,14 +110,32 @@ def profile(id):
             student_attended = sorted(student.attended, key=lambda session: session.id)
             student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
             if student:
-                return render_template('student_profile.html', student=student,
+                return render_template('profile1.html', student=student,
                                     marks=student_marks, attended=student_attended,
                                       sessions=all_session, title='Profile')
         else :
             return "you can only view your profile", 403
     else:
         return "you can only view your profile", 403
-
+@app.route('/profile2/<int:id>', methods=['GET', 'POST'])
+def profile2(id):
+    if current_user.is_authenticated :
+        if current_user.id == id or current_user.email==('teacher@elsheko.com') :
+            student = Student.query.filter_by(id=id).first()
+            all_session = Session.query.filter_by(grade=student.grade).all()
+            student_attended = sorted(student.attended, key=lambda session: session.id)
+            student_marks = db.session.query(Student_Session).filter(Student_Session.c.student_id==id).order_by(Student_Session.c.session_id).all()
+            all_grade_data = get_by_grade(student.grade)
+            student_data = all_grade_data[student.id]
+            list_of_student_marks = get_list_of_student_marks(student)
+            if student:
+                return render_template('profile2.html', student=student,
+                                    marks=student_marks, attended=student_attended, number_of_attended=len(student_attended),
+                                      sessions=all_session,sessions_number=len(all_session),precentage = student_data['precentage'],list_of_student_marks=list_of_student_marks ,title='Profile')
+        else :
+            return "you can only view your profile", 403
+    else:
+        return "you can only view your profile", 403
 @login_required
 @app.route('/envaluate/<string:grade>', methods=['GET', 'POST'])
 def envaluate_session(grade):
