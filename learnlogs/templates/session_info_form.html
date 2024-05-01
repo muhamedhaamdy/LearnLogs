@@ -52,7 +52,7 @@
             <h1>Create A New Session for {{ grade }} Grade</h1>
         </div>
         <div class="card-body">
-            <form method="POST">
+            <form method="POST" action="" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class="form-group">
                     <label for="title" class="custom-form-label">Title</label>
@@ -63,12 +63,22 @@
                     {{ form.description(class="custom-form-control", id="description") }}
                 </div>
                 <div class="form-group">
-                    <label for="attachment_link" class="custom-form-label">Attachment Link</label>
+                    {{ form.attachment_link.label(class="custom-form-label") }}
                     {{ form.attachment_link(class="custom-form-control", id="attachment_link") }}
+                    {% if form.attachment_link.errors %}
+                        {% for error in form.attachment_link.errors %}
+                            <span class="text-danger">{{ error }}</span></div></br>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="video_link" class="custom-form-label">Video Link</label>
+                    {{ form.video_link.label(class="custom-form-label") }}
                     {{ form.video_link(class="custom-form-control", id="video_link") }}
+                    {% if form.attachment_link.errors %}
+                        {% for error in form.video_link.errors %}
+                                <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <button type="submit" class="custom-submit-button">Submit</button>
             </form>
