@@ -36,13 +36,27 @@
     {% else %}
         <title>Flask Blog</title>
     {% endif %}
+
+
+    <style>
+      #footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1484d4; /* Adjust the background color as needed */
+        color: #fff; /* Adjust the text color as needed */
+        padding: 10px 0; /* Adjust the padding as needed */
+        text-align: center;
+      }
+      </style>
 </head>
 <body>
     <header class="site-header">
     </header>
     <main role="main" class="container">
       <div class="row justify-content-center h-1000">
-        <div class="col-md-8">
+        <div class="col-md-10">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               {% for category, message in messages %}
@@ -96,7 +110,7 @@
             Designed by <a class="link-copyright" href="https://www.facebook.com/ana.messi.372">learnlogs team</a>
           </div>
         </div>
-      </footer><!-- End Footer -->
+      </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
