@@ -1,33 +1,79 @@
-{% extends 'layout.html' %}
+{% extends 'teacher_sidebar.html' %}
 {% block content %}
-    <div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2">
-        <div class="card container">
-            <div class="card-header title-create-session">
-                <h1 class="text-body-emphasis">Create A New Session for {{grade}} Grade</h1>
-            </div>
-            <div class="card-body">
-                <form method="POST">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        <label for="title" class="form-control-label">Title</label>
-                        {{ form.title(class="form-control", id="title") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="form-control-label">Description</label>
-                        {{ form.description(class="form-control", id="description") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="attachment_link" class="form-control-label">Attachment Link</label>
-                        {{ form.attachment_link(class="form-control", id="attachment_link") }}
-                    </div>
-                    <div class="form-group">
-                        <label for="video_link" class="form-control-label">Video Link</label>
-                        {{ form.video_link(class="form-control", id="video_link") }}
-                    </div>
-                    <button type="submit" class="btn btn-primary btm-submit">Submit</button>
-                </form>
-            </div>
+<style>
+    .custom-card {
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .custom-card .card-header {
+        background-color: #007bff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 20px;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+    }
+    .custom-card .card-body {
+        padding: 20px;
+    }
+    .custom-form-label {
+        font-weight: bold;
+        color: #333;
+    }
+    .custom-form-control {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+        font-size: 16px;
+    }
+    .custom-submit-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        margin-top: 10px;
+        border-radius: 5px;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .custom-submit-button:hover {
+        background-color: #0056b3;
+    }
+</style>
 
+<div data-bs-spy="scroll" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2">
+    <div class="custom-card container">
+        <div class="card-header title-create-session">
+            <h1>Create A New Session for {{ grade }} Grade</h1>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="title" class="custom-form-label">Title</label>
+                    {{ form.title(class="custom-form-control", id="title") }}
+                </div>
+                <div class="form-group">
+                    <label for="description" class="custom-form-label">Description</label>
+                    {{ form.description(class="custom-form-control", id="description") }}
+                </div>
+                <div class="form-group">
+                    <label for="attachment_link" class="custom-form-label">Attachment Link</label>
+                    {{ form.attachment_link(class="custom-form-control", id="attachment_link") }}
+                </div>
+                <div class="form-group">
+                    <label for="video_link" class="custom-form-label">Video Link</label>
+                    {{ form.video_link(class="custom-form-control", id="video_link") }}
+                </div>
+                <button type="submit" class="custom-submit-button">Submit</button>
+            </form>
         </div>
     </div>
+</div>
+
 {% endblock %}

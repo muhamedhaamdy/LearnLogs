@@ -1,0 +1,37 @@
+{% extends 'student_sidebar_test.html' %}
+{% block content %}
+    <div class="container">
+        <h1>Welcome {{ student.student_name }}</h1>
+        <p class="text-secondary">{{ current_user.email }}</p>
+        <h2>Here are your logs:</h2>
+        <div class="row">
+            {% for session in sessions %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ session.title }}</h5>
+                            <p class="card-text">{{ session.description }}</p>
+                            <a href="{{ url_for('session_info_for_student', id=session.id) }}" class="btn btn-primary">View Details</a>
+                            {% if session in attended %}
+                            <span class="badge badge-success attendance-badge ml-2">
+                                Attendance: True
+                            </span>
+                            <span class="badge badge-info mark-badge ml-2">
+                                {% for mark in marks %}
+                                    {% if mark.session_id == session.id %}
+                                        Mark: {{ mark.mark }}
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                            {% else %}
+                            <span class="badge badge-danger attendance-badge ml-2">
+                                Attendance: False
+                            </span >
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>  
+{% endblock %}

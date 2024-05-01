@@ -422,7 +422,7 @@ Copyright (c) 2015 Daniel Eden
     top: 1px; }
 
 .btn-primary {
-  background-color: #51cbce;
+  background-color: #007bff;
   color: #FFFFFF; }
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary:active:focus, .btn-primary:active:hover, .btn-primary.active:focus, .btn-primary.active:hover,
   .show > .btn-primary.dropdown-toggle,
@@ -2993,7 +2993,9 @@ License - nucleoapp.com/license/
 .wrapper {
   position: relative;
   top: 0;
-  height: 100vh; }
+  height: 100vh;
+  background-color: #e4e4e4;
+ }
   .wrapper.wrapper-full-page {
     min-height: 100vh;
     height: auto; }
@@ -3179,7 +3181,7 @@ License - nucleoapp.com/license/
     .off-canvas-sidebar .logo-tim img {
       width: 60px;
       height: 60px; }
-  .sidebar:before, .sidebar:after,
+  /* .sidebar:before, .sidebar:after, */
   .off-canvas-sidebar:before,
   .off-canvas-sidebar:after {
     display: block;
@@ -3340,7 +3342,7 @@ License - nucleoapp.com/license/
   position: relative;
   float: right;
   width: calc(100% - 260px);
-  background-color: #1484d4;
+  background-color: #efefef ;
   transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1); }
   .main-panel > .content {
     padding: 0 30px 30px;

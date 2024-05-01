@@ -1,35 +1,82 @@
-{% extends "layout.html" %}
+{% extends "teacher_sidebar.html" %}
 {% block content %}
-<div class="container mt-5">
-    <h1>Evaluate Session</h1>
-    <div class="row">
+<style>
+    .custom-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .custom-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .custom-card {
+        border-radius: 10px;
+        margin-bottom: 20px;
+        background-color: #efefef;
+        transition: transform 0.3s;
+    }
+    .custom-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+    }
+    .custom-card-body {
+        padding: 20px;
+    }
+    .custom-card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .custom-card-text {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .custom-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .custom-btn:hover {
+        background-color: #0056b3;
+    }
+    .custom-text-success {
+        color: #28a745;
+    }
+</style>
+
+<div class="custom-container mt-5">
+    <h1 class="custom-title">Evaluate Session</h1>
+    <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mb-8">
-                <div class="card-body">
-                    <h2>{{sessions.grade}} Grade</h2>
-                    {% for session in sessions %}
-                    {% if session.id in session_ids %}
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Session: {{ session.id }}</h5>
-                                <p class="card-text">{{ session.title }}</p>
-                                <small>Alerady Evaluated</small>
+            {% for session in sessions %}
+                <div class="custom-card">
+                    <div class="custom-card-body">
+                        <h2 class="text-center">{{ sessions.grade }} Grade</h2>
+                        <div class="custom-card mb-3">
+                            <div class="custom-card-body">
+                                <h5 class="custom-card-title">Session: {{ session.id }}</h5>
+                                <p class="custom-card-text">{{ session.title }}</p>
+                                {% if session.id in session_ids %}
+                                    <small class="custom-text-success">Already Evaluated</small>
+                                {% else %}
+                                    <a href="{{ url_for('evaluate', grade=session.grade, id=session.id) }}" class="custom-btn">Evaluate Session</a>
+                                {% endif %}
                             </div>
                         </div>
-                    {% else %}
-                        <a href="{{ url_for('evaluate', grade=session.grade, id=session.id) }}" class="card-link">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Session: {{ session.id }}</h5>
-                                    <p class="card-text">{{ session.title }}</p>
-                                </div>
-                            </div>
-                        </a>
-                        {% endif %}
-                    {% endfor %}
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %}
