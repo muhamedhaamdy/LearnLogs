@@ -118,9 +118,9 @@ def dashboard():
                 top_student_third=first_value3,
                 title='Dashboard')
         else:
-            return "this page is only for teacher", 403
+           return render_template('error_page.html', title='Register', message='this page is only for teacher')
     else:
-        return "this page is only for teacher", 403
+           return render_template('error_page.html', title='Register', message='this page is only for teacher')
 
 
 @login_required
@@ -146,10 +146,9 @@ def dashboard_grade(grade):
                 sessions=session,
                 title='dashboard_grade')
         else:
-            return "Unauthorized access", 403
+           return render_template('error_page.html', title='Register', message='this page is only for teacher')
     else:
-        return "Unauthorized access", 403
-
+        return render_template('error_page.html', title='Register', message='this page is only for teacher')
 
 @login_required
 @app.route('/profile/<int:id>', methods=['GET', 'POST'])
@@ -181,9 +180,9 @@ def profile1(id):
                     sessions=all_session,
                     title='Profile')
         else:
-            return "you can only view your profile", 403
+           return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
-        return "you can only view your profile", 403
+       return render_template('error_page.html', title='Register', message='you can only view your profile')
 
 
 @app.route('/statistics/<int:id>', methods=['GET', 'POST'])
@@ -222,9 +221,9 @@ def profile2(id):
                     list_of_student_marks=list_of_student_marks,
                     title='Profile')
         else:
-            return "you can only view your profile", 403
+           return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
-        return "you can only view your profile", 403
+        return render_template('error_page.html', title='Register', message='you can only view your profile')
 
 
 @login_required
@@ -257,9 +256,9 @@ def profile(id):
                     sessions=all_session,
                     title='Profile')
         else:
-            return "you can only view your profile", 403
+           return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
-        return "you can only view your profile", 403
+       return render_template('error_page.html', title='Register', message='you can only view your profile')
 
 
 @login_required
@@ -286,9 +285,9 @@ def envaluate_session(grade):
                 session_ids=all_session_created,
                 title='envaluate')
         else:
-            return "Unauthorized access", 403
+           return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
-        return "Unauthorized access", 403
+       return render_template('error_page.html', title='Register', message='you can only view your profile')
 
 
 @login_required
@@ -323,7 +322,7 @@ def evaluate(grade, id):
         return render_template('evalute.html', form=form,
                                students=students, title='create_session')
     else:
-        return "Unauthorized access", 403
+       return render_template('error_page.html', title='Register', message='Unauthorized access')
 
 
 @app.route('/session/<string:grade>', methods=['GET', 'POST'])
@@ -364,7 +363,7 @@ def create_session(grade):
                 form=form,
                 title='session_info_form')
         else:
-            return "Unauthorized access", 403
+           return render_template('error_page.html', title='Register', message='Unauthorized access')
 
 
 @app.route('/session/<int:id>', methods=['GET', 'POST'])
@@ -376,7 +375,7 @@ def session_info_for_student(id):
             session=session,
             title='session_info')
     else:
-        return "Unauthorized access", 403
+       return render_template('error_page.html', title='Register', message='Unauthorized access')
 
 
 @login_required
