@@ -1,5 +1,30 @@
 {% extends "teacher_sidebar.html" %}
 {% block content %}
+<style>
+    .card {
+        width: 100%; /* Set initial width to 100% */
+        max-width: 300px; /* Set maximum width */
+        margin: 0 auto; /* Center the card horizontally */
+    }
+    .cardBox
+    {
+        display: flex;
+        flex-direction: row;
+    }
+
+    @media screen and (max-width: 500px) {
+        .cardBox {
+            flex-direction: column; /* Switch back to row layout for larger screens */
+        }
+        .card {
+        width: 100%; /* Set initial width to 100% */
+        max-width: 100px; /* Set maximum width */
+        margin: 0 auto; /* Center the card horizontally */
+    }
+    }
+</style>
+
+
             <!-- ======================= Cards ================== -->
             <div class="cardBox">
                 <div class="card">
@@ -33,15 +58,7 @@
                         <ion-icon name="stats-chart-outline"></ion-icon>
                     </div>
                 </div>
-                <div class="card">
-                    <div>
-                        <a href="{{url_for('dashboard_grade', grade='first')}}"><div class="numbers">more details</div></a>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="information-circle-outline"></ion-icon>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="cardBox">
@@ -76,15 +93,7 @@
                         <ion-icon name="stats-chart-outline"></ion-icon>
                     </div>
                 </div>
-                <div class="card">
-                    <div>
-                        <a href="{{url_for('dashboard_grade', grade='second')}}"><div class="numbers">more details</div></a>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="information-circle-outline"></ion-icon>
-                    </div>
-                </div>
+                
             </div>
 
             <div class="cardBox">
@@ -119,14 +128,6 @@
                         <ion-icon name="stats-chart-outline"></ion-icon>
                     </div>
                 </div>
-                <div class="card">
-                    <div>
-                        <a href="{{url_for('dashboard_grade', grade='third')}}"><div class="numbers">more details</div></a>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="information-circle-outline"></ion-icon>
-                    </div>
-                </div>
+              
             </div>
 {% endblock content %}

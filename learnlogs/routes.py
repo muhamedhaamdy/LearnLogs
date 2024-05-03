@@ -346,7 +346,7 @@ def create_session(grade):
                         form.attachment_link.data, 'static/attachments')
                 if form.video_link.data:
                     video_file = save_path(
-                        form.video_link.data, 'static/images')
+                        form.video_link.data, 'static/videos')
                 session = Session(title=form.title.data,
                                   description=form.description.data,
                                   attachment_link=attachment_file,
