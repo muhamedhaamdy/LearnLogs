@@ -379,6 +379,27 @@ def session_info_for_student(id):
 
 
 @login_required
+@app.route('/all_session/<string:grade>', methods=['GET', 'POST'])
+def all_session_grade(grade):
+
+    if current_user.is_authenticated:
+        if current_user.id == id or current_user.email == (
+                'teacher@elsheko.com'):
+            all_session = Session.query.filter_by(grade=grade).all()
+
+            if all_session:
+                return render_template(
+                    'all_session_grade.html',sessions=all_session,student =current_user,
+                    title='session_grade')
+        else:
+           return render_template('error_page.html', title='Register', message='you can only view your profile')
+    else:
+       return render_template('error_page.html', title='Register', message='you can only view your profile')
+
+
+
+
+@login_required
 @app.route("/logout")
 def logout():
     """Logout

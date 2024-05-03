@@ -59,7 +59,7 @@
         <div class="custom-card">
             <h5>Student Name: {{ all_students[student.id]['student_name'] }}</h5>
             <p>
-                <span class="custom-percentage-box">Marks: {{ all_students[student.id]['percentage'] }}%</span>
+                <span class="custom-percentage-box">Marks: {{ all_students[student.id]['precentage']|round(2) }}%</span>
                 <span class="custom-percentage-box">Attendance: {{ ((all_students[student.id]['attendance']|length / sessions|length) * 100)|round(2) }}%</span>
                 <a href="{{ url_for('profile1', id=student.id) }}" class="custom-btn">Details</a>
             </p>
