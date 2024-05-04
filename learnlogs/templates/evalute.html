@@ -1,26 +1,106 @@
 {% extends 'teacher_sidebar.html' %}
 {% block content %}
-    <div class="container">
-        <h1 class="mt-5">Create Session</h1>
-        <h2>Grade: {{ session.grade }}</h2>
-        <form method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <fieldset class="mt-4">
-                <legend>Quiz Information</legend>
-                <div class="form-group">
-                    <label for="quiz_full_mark">Quiz Full Mark:</label>
-                    {{ form.quiz_full_mark(size=5, class="form-control") }}
-                </div>
-                {% for student, student_form in zip(students, form.students_list) %}
-                    <div class="form-group">
-                        <h3>Student {{ student.student_name }}</h3>
-                        <label for="{{ student_form.quiz_mark.id }}">Quiz Mark for {{ student_form.absent.label.text }}:</label>
-                        {{ student_form.absent(class="form-check-input") }}
-                        {{ student_form.quiz_mark(size=5, class="form-control") }}
-                    </div>
-                {% endfor %}
-            </fieldset>
-            <button type="submit" class="btn btn-primary mt-4">{{ form.submit.label }}</button>
-        </form>
-    </div>
+<style>
+.custom_container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.btn_wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: 20px; /* Adjust as needed */
+    transform: translateX(-50%);
+}
+
+.quiz_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.quiz_table th, .quiz_table td {
+    border: 1px solid #1795ce;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+.quiz_table th {
+    background-color: #1795ce;
+    color: #fff;
+}
+
+.quiz_table input[type="text"], .quiz_table input[type="checkbox"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.quiz_table input[type="checkbox"] {
+    width: auto;
+}
+
+.btn_submit {
+    background-color: #1795ce;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.center-submit {
+  text-align: center;
+}
+
+.btn_submit:hover {
+    background-color: #0e6aae;
+}
+</style>
+<div class="custom_container">
+    <h1 class="mt-5">Eavluate Session</h1>
+    <h2>Grade: {{ students[0].grade }}</h2>
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <fieldset class="mt-4">
+            <legend>Quiz Information</legend>
+            <table class="quiz_table">
+              <thead>
+                  <tr>
+                      <td>Full Mark:</td>
+                      <td colspan="2">
+                          {{ form.quiz_full_mark(size=5, class="form-control") }}
+                      </td>
+                  </tr>
+                  <tr>
+                      <th>Name</th>
+                      <th>Quiz Mark</th>
+                      <th>Attendance</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for student, student_form in zip(students, form.students_list) %}
+                  <tr>
+                      <td>{{ student.student_name }}</td>
+                      <td>
+                          {{ student_form.quiz_mark(size=5, class="form-control") }}
+                      </td>
+                      <td>
+                          {{ student_form.absent(class="form-check-input") }}
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+              <tfoot>
+                  <tr class="center-submit">
+                      <td colspan="3">{{ form.submit(class='btn_submit') }}</td>
+                  </tr>
+              </tfoot>
+          </table>          
+        </fieldset>
+    </form>
+</div>
 {% endblock %}

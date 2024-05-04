@@ -19,7 +19,10 @@ def get_by_grade(grade):
                 total_mark_for_student += mark.mark / mark.full_mark
             else:
                 continue
-        total_mark_precision = total_mark_for_student / len(all_session) * 100
+        if len(all_session) == 0:
+            total_mark_precision = 0
+        else:
+            total_mark_precision = total_mark_for_student / len(all_session) * 100
         all_student_data[student.id] = {'student_name': student.student_name,
                                         'email': student.email,
                                         'grade': student.grade,

@@ -262,7 +262,7 @@ def profile(id):
 
 
 @login_required
-@app.route('/envaluate/<string:grade>', methods=['GET', 'POST'])
+@app.route('/evaluate/<string:grade>', methods=['GET', 'POST'])
 def envaluate_session(grade):
     """envaluate_session page
 
@@ -291,8 +291,8 @@ def envaluate_session(grade):
 
 
 @login_required
-@app.route('/evaluate/<string:grade>/<int:id>', methods=['GET', 'POST'])
-def evaluate(grade, id):
+@app.route('/evaluate/<int:id>', methods=['GET', 'POST'])
+def evaluate(id):
     """envaluate_session page
 
     Args:
@@ -303,7 +303,8 @@ def evaluate(grade, id):
     """
     if current_user.is_authenticated:
         if current_user.email == ('teacher@elsheko.com'):
-            students = Student.query.filter_by(grade=grade).all()
+            session = Session.query.filter_by(id=id).first()
+            students = Student.query.filter_by(grade=session.grade).all()
             form = Submit_Student_mark()
             if form.validate_on_submit():
                 for student, student_form in zip(students, form.students_list):
@@ -315,7 +316,7 @@ def evaluate(grade, id):
                     )
                     db.session.execute(student_session_entry)
                 db.session.commit()
-                return redirect(url_for('dashboard_grade', grade=grade))
+                return redirect(url_for('dashboard_grade', grade=session.grade))
             else:
                 print("Form validation failed!")
                 print(form.errors)
@@ -365,18 +366,24 @@ def create_session(grade):
         else:
            return render_template('error_page.html', title='Register', message='Unauthorized access')
 
+from flask import request
 
-@app.route('/session/<int:id>', methods=['GET', 'POST'])
-def session_info_for_student(id):
+@app.route('/session/<int:session_id>', methods=['GET', 'POST'])
+def session_info_for_student(session_id):
+    student_id = request.args.get('student_id')
+    if student_id is None:
+        # Handle the case where student_id is not provided
+        return render_template('error_page.html', title='Error', message='Student ID is missing')
+    
     if current_user.is_authenticated:
-        session = Session.query.filter_by(id=id).first()
+        session = Session.query.filter_by(id=session_id).first()
+        student = Student.query.filter_by(id=student_id).first()
         return render_template(
-            'session_info.html',
-            session=session,
-            title='session_info')
+            'session_for_student.html',
+            session=session, student=student,
+            title='Session Info')
     else:
-       return render_template('error_page.html', title='Register', message='Unauthorized access')
-
+       return render_template('error_page.html', title='Error', message='Unauthorized access')
 
 @login_required
 @app.route('/all_session/<string:grade>', methods=['GET', 'POST'])
@@ -386,10 +393,10 @@ def all_session_grade(grade):
         if current_user.id == id or current_user.email == (
                 'teacher@elsheko.com'):
             all_session = Session.query.filter_by(grade=grade).all()
-
+            student = Student.query.filter_by(grade=grade).first()
             if all_session:
                 return render_template(
-                    'all_session_grade.html',sessions=all_session,student =current_user,
+                    'all_session_grade.html',sessions=all_session,student=student,
                     title='session_grade')
         else:
            return render_template('error_page.html', title='Register', message='you can only view your profile')

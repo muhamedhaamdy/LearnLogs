@@ -1,133 +1,128 @@
 {% extends "teacher_sidebar.html" %}
 {% block content %}
 <style>
-    .card {
-        width: 100%; /* Set initial width to 100% */
-        max-width: 300px; /* Set maximum width */
-        margin: 0 auto; /* Center the card horizontally */
+    .card
+    {
+        width: 300px;
     }
     .cardBox
     {
         display: flex;
-        flex-direction: row;
-    }
-
-    @media screen and (max-width: 500px) {
-        .cardBox {
-            flex-direction: column; /* Switch back to row layout for larger screens */
-        }
-        .card {
-        width: 100%; /* Set initial width to 100% */
-        max-width: 100px; /* Set maximum width */
-        margin: 0 auto; /* Center the card horizontally */
-    }
+        justify-content: space-evenly;
+        margin-top: 20px;
     }
 </style>
 
 
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{student_first}}</div>
-                        <div class="cardName"><strong>First grade</strong> students</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="accessibility-outline"></ion-icon>                    
-                    </div>
-                </div>
-                <a href="{{ url_for('all_session_grade', grade='first') }}" style="text-decoration: none;">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{session_first}}</div>
-                        <div class="cardName">First grade sessions</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="document-text-outline"></ion-icon>                    
-                    </div>
-                </div>
-                </a>
-                <div class="card">
-                    <div class="numbers">TOP</div>
-                        <div class="cardName">
-                            {{ top_student_first['student_name']}}                          
-                        </div>
-                    <div class="iconBx">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                    </div>
-                </div>
-                
+<!-- ======================= Cards ================== -->
+<div class="cardBox">
+    <a href="{{ url_for('dashboard_grade', grade='first') }}" style="text-decoration: none;">
+        <div class="card">
+            <div>
+                <div class="numbers">{{student_first}}</div>
+                <div class="cardName"><strong>First grade</strong> students</div>
             </div>
 
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{student_second}}</div>
-                        <div class="cardName"><strong>second grade</strong> students</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="accessibility-outline"></ion-icon>                    
-                    </div>
-                </div>
-                <a href="{{ url_for('all_session_grade', grade='first') }}" style="text-decoration: none;">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{session_second}}</div>
-                        <div class="cardName">second grade sessions</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="document-text-outline"></ion-icon>                    
-                    </div>
-                </div>
-                </a>
-                <div class="card">
-                    <div class="numbers">TOP</div>
-                        <div class="cardName">
-                            {{ top_student_second['student_name']}}                          
-                        </div>
-                    <div class="iconBx">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                    </div>
-                </div>
-                
+            <div class="iconBx">
+                <ion-icon name="accessibility-outline"></ion-icon>                    
+            </div>
+        </div>
+    </a>
+    <a href="{{ url_for('all_session_grade', grade='first') }}" style="text-decoration: none;">
+        <div class="card">
+            <div>
+                <div class="numbers">{{session_first}}</div>
+                <div class="cardName">First grade sessions</div>
             </div>
 
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{student_third}}</div>
-                        <div class="cardName"><strong>Third grade</strong> students</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="accessibility-outline"></ion-icon>                    
-                    </div>
-                </div>
-                <a href="{{ url_for('all_session_grade', grade='first') }}" style="text-decoration: none;">
-                <div class="card">
-                    <div>
-                        <div class="numbers">{{session_third}}</div>
-                        <div class="cardName">Third grade sessions</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="document-text-outline"></ion-icon>                    
-                    </div>
-                </div>
-                </a>
-                <div class="card">
-                    <div class="numbers">TOP</div>
-                        <div class="cardName">
-                            {{ top_student_third['student_name']}}                              
-                        </div>
-                    <div class="iconBx">
-                        <ion-icon name="stats-chart-outline"></ion-icon>
-                    </div>
-                </div>
-              
+            <div class="iconBx">
+                <ion-icon name="document-text-outline"></ion-icon>                    
             </div>
+        </div>
+    </a>
+    <div class="card">
+        <div class="numbers">TOP</div>
+            <div class="cardName">
+                {{ top_student_first['student_name']}}                          
+            </div>
+        <div class="iconBx">
+            <ion-icon name="stats-chart-outline"></ion-icon>
+        </div>
+    </div>
+    
+</div>
+
+<div class="cardBox">
+    <a href="{{ url_for('dashboard_grade', grade='second') }}" style="text-decoration: none;">
+        <div class="card">
+        <div>
+            <div class="numbers">{{student_second}}</div>
+            <div class="cardName"><strong>Second grade</strong> students</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="accessibility-outline"></ion-icon>                    
+        </div>
+    </div>
+    </a>
+    <a href="{{ url_for('all_session_grade', grade='second') }}" style="text-decoration: none;">
+    <div class="card">
+        <div>
+            <div class="numbers">{{session_second}}</div>
+            <div class="cardName">second grade sessions</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="document-text-outline"></ion-icon>                    
+        </div>
+    </div>
+    </a>
+    <div class="card">
+        <div class="numbers">TOP</div>
+            <div class="cardName">
+                {{ top_student_second['student_name']}}                          
+            </div>
+        <div class="iconBx">
+            <ion-icon name="stats-chart-outline"></ion-icon>
+        </div>
+    </div>
+    
+</div>
+
+<div class="cardBox">
+    <a href="{{ url_for('dashboard_grade', grade='third') }}" style="text-decoration: none;">
+    <div class="card">
+        <div>
+            <div class="numbers">{{student_third}}</div>
+            <div class="cardName"><strong>Third grade</strong> students</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="accessibility-outline"></ion-icon>                    
+        </div>
+    </div>
+    </a>
+    <a href="{{ url_for('all_session_grade', grade='third') }}" style="text-decoration: none;">
+    <div class="card">
+        <div>
+            <div class="numbers">{{session_third}}</div>
+            <div class="cardName">Third grade sessions</div>
+        </div>
+
+        <div class="iconBx">
+            <ion-icon name="document-text-outline"></ion-icon>                    
+        </div>
+    </div>
+    </a>
+    <div class="card">
+        <div class="numbers">TOP</div>
+            <div class="cardName">
+                {{ top_student_third['student_name']}}                              
+            </div>
+        <div class="iconBx">
+            <ion-icon name="stats-chart-outline"></ion-icon>
+        </div>
+    </div>
+    
+</div>
 {% endblock content %}

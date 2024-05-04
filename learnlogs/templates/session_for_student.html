@@ -1,0 +1,87 @@
+{% extends 'student_sidebar_test.html' %}
+{% block content %}
+<style>
+.custom_container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title-card-session {
+    color: #1484d4;
+    margin-bottom: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.card-text {
+    color: #666;
+}
+
+/* Video Attachment Styling */
+.video-attachment {
+    border-radius: 10px;
+    padding: 40px 20px;
+}
+
+.video-attachment .card-title {
+    color: #1484d4;
+    margin-bottom: 20px;
+}
+
+.embed-responsive {
+    width: 100%;
+    max-width: 960px; /* Adjust width to make it larger */
+    margin-bottom: 20px;
+}
+
+.video-attachment video {
+    width: 100%;
+    max-width: 960px; /* Adjust width to match the embed */
+    height: auto;
+}
+
+</style>
+<div class="custom_container">
+    <h1 class="mb-4 h1 text-center title-card-session">Session Title:{{ session.title }}</h1>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Description:</h5>
+            <p class="card-text">{{ session.description }}</p>
+        </div>
+    </div>
+    <div class="card video-attachment">
+        <div class="card-body">
+            <h5 class="card-title">Session Attachment</h5>
+            <embed src="../static/attachments/hello.pdf" width="650px" height="380px" />
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Session Video</h5>
+            <video width="1000" height="500" controls>
+                <source src="../static/videos/11da9a2512610086.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>                
+        </div>
+    </div>
+</div>
+{% endblock %}

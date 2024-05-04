@@ -215,7 +215,7 @@
               <div class="custom-card-body">
                   <h3 class="custom-card-title">{{ session.title }}</h3>
                   <p class="custom-card-text">{{ session.description }}</p>
-                  <a href="{{ url_for('session_info_for_student', id=session.id) }}" class="custom-button">View Details</a>
+                  <a href="{{ url_for('session_info_for_student', session_id=session.id, student_id=student.id) }}" class="custom-button">View Details</a>
                   {% if session in attended %}
                   <span class="custom-badge custom-success-badge ml-2">
                       Attendance: True
