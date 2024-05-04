@@ -366,8 +366,6 @@ def create_session(grade):
         else:
            return render_template('error_page.html', title='Register', message='Unauthorized access')
 
-from flask import request
-
 @app.route('/session/<int:session_id>', methods=['GET', 'POST'])
 def session_info_for_student(session_id):
     student_id = request.args.get('student_id')
@@ -384,6 +382,7 @@ def session_info_for_student(session_id):
             title='Session Info')
     else:
        return render_template('error_page.html', title='Error', message='Unauthorized access')
+
 
 @login_required
 @app.route('/all_session/<string:grade>', methods=['GET', 'POST'])
