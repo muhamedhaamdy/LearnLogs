@@ -40,6 +40,8 @@
             </div>
         </div>
     </a>
+
+    <a href="{{ url_for('profile', id=top_student_first['id']) }}" style="text-decoration: none;">
     <div class="card">
         <div class="numbers">TOP</div>
             <div class="cardName">
@@ -49,6 +51,7 @@
             <ion-icon name="stats-chart-outline"></ion-icon>
         </div>
     </div>
+    </a>
     
 </div>
 
@@ -77,6 +80,8 @@
         </div>
     </div>
     </a>
+
+    <a href="{{ url_for('profile', id=top_student_second['id']) }}" style="text-decoration: none;">
     <div class="card">
         <div class="numbers">TOP</div>
             <div class="cardName">
@@ -86,6 +91,7 @@
             <ion-icon name="stats-chart-outline"></ion-icon>
         </div>
     </div>
+    </a>
     
 </div>
 
@@ -114,6 +120,8 @@
         </div>
     </div>
     </a>
+
+    <a href="{{ url_for('profile', id=top_student_third['id']) }}" style="text-decoration: none;">
     <div class="card">
         <div class="numbers">TOP</div>
             <div class="cardName">
@@ -123,6 +131,7 @@
             <ion-icon name="stats-chart-outline"></ion-icon>
         </div>
     </div>
+    </a>
     
 </div>
 {% endblock content %}

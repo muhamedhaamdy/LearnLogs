@@ -64,10 +64,10 @@ def login():
     """
     form = LoginForm()
     if form.validate_on_submit():
-        if form.email.data == 'teacher@elsheko.com' and form.password.data == '1234':
+        if form.email.data == 'teacher@gmail.com' and form.password.data == '1234':
             login_user(
                 Student.query.filter_by(
-                    email='teacher@elsheko.com').first(),
+                    email='teacher@gmail.com').first(),
                 remember=False)
             return redirect(url_for('dashboard'))
         student = Student.query.filter_by(email=form.email.data).first()
@@ -88,7 +88,7 @@ def dashboard():
         the dashboard: the dashboard page for the teacher
     """
     if current_user.is_authenticated:
-        if current_user.email == ('teacher@elsheko.com'):
+        if current_user.email == ('teacher@gmail.com'):
             student_first = len(Student.query.filter_by(grade='first').all())
             student_second = len(Student.query.filter_by(grade='second').all())
             student_third = len(Student.query.filter_by(grade='third').all())
@@ -135,7 +135,7 @@ def dashboard_grade(grade):
         the grade page: the dashboard page for the teacher for a specific grade
     """
     if current_user.is_authenticated:
-        if current_user.email == ('teacher@elsheko.com'):
+        if current_user.email == ('teacher@gmail.com'):
             all_data = get_by_grade(grade)
             students = Student.query.filter_by(grade=grade).all()
             session = Session.query.filter_by(grade=grade).all()
@@ -163,7 +163,7 @@ def profile1(id):
     """
     if current_user.is_authenticated:
         if current_user.id == id or current_user.email == (
-                'teacher@elsheko.com'):
+                'teacher@gmail.com'):
             student = Student.query.filter_by(id=id).first()
             all_session = Session.query.filter_by(grade=student.grade).all()
             student_attended = sorted(
@@ -197,7 +197,7 @@ def profile2(id):
     """
     if current_user.is_authenticated:
         if current_user.id == id or current_user.email == (
-                'teacher@elsheko.com'):
+                'teacher@gmail.com'):
             student = Student.query.filter_by(id=id).first()
             all_session = Session.query.filter_by(grade=student.grade).all()
             student_attended = sorted(
@@ -239,7 +239,7 @@ def profile(id):
     """
     if current_user.is_authenticated:
         if current_user.id == id or current_user.email == (
-                'teacher@elsheko.com'):
+                'teacher@gmail.com'):
             student = Student.query.filter_by(id=id).first()
             all_session = Session.query.filter_by(grade=student.grade).all()
             student_attended = sorted(
@@ -273,7 +273,7 @@ def envaluate_session(grade):
         envaluate page: to set the marks and attedence for the students
     """
     if current_user.is_authenticated:
-        if current_user.email == ('teacher@elsheko.com'):
+        if current_user.email == ('teacher@gmail.com'):
             all_sessions = Session.query.filter_by(grade=grade).all()
             all_data = db.session.query(Student_Session).all()
             all_session_created = []
@@ -302,7 +302,7 @@ def evaluate(id):
         envaluate page: to set the marks and attedence for the students
     """
     if current_user.is_authenticated:
-        if current_user.email == ('teacher@elsheko.com'):
+        if current_user.email == ('teacher@gmail.com'):
             session = Session.query.filter_by(id=id).first()
             students = Student.query.filter_by(grade=session.grade).all()
             form = Submit_Student_mark()
@@ -337,7 +337,7 @@ def create_session(grade):
         Session page: to create a new session for the teacher
     """
     if current_user.is_authenticated:
-        if current_user.email == ('teacher@elsheko.com'):
+        if current_user.email == ('teacher@gmail.com'):
             form = SessionForm()
             if form.validate_on_submit():
                 attachment_file = 'default.pdf'
@@ -390,13 +390,15 @@ def all_session_grade(grade):
 
     if current_user.is_authenticated:
         if current_user.id == id or current_user.email == (
-                'teacher@elsheko.com'):
+                'teacher@gmail.com'):
             all_session = Session.query.filter_by(grade=grade).all()
             student = Student.query.filter_by(grade=grade).first()
             if all_session:
                 return render_template(
                     'all_session_grade.html',sessions=all_session,student=student,
                     title='session_grade')
+            else:
+                return render_template('error_page.html', title='Register', message='No session found')
         else:
            return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:

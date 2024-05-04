@@ -41,6 +41,7 @@ def get_top(grade):
     all_data = get_by_grade(grade)
     for student in all_students:
         all_student_data[student.id] = {
+            'id': student.id,
             'student_name': student.student_name, 'precentage': all_data[student.id]['precentage']}
     all_student_data = dict(
         sorted(

@@ -43,9 +43,9 @@ with app.app_context():
 
     
     #creating the students and the sessions
-    saad = Student(student_name='saad', email='saad@elsheko.com', password='password', student_phone='12345678901', parent_name='saad parent', parent_phone='12345678901', address='saad address', grade='first')
-    umar = Student(student_name='umar', email='umar@elsheko.com', password='password', student_phone='12345678901', parent_name='umar parent', parent_phone='12345678901', address='umar address', grade='first')
-    bor3y = Student(student_name='bor3y', email='bor3y@elsheko.com', password='password', student_phone='12345678901', parent_name='bor3y parent', parent_phone='12345678901', address='bor3y address', grade='first')
+    saad = Student(student_name='saad', email='saad@gmail.com', password='password', student_phone='12345678901', parent_name='saad parent', parent_phone='12345678901', address='saad address', grade='first')
+    umar = Student(student_name='umar', email='umar@gmail.com', password='password', student_phone='12345678901', parent_name='umar parent', parent_phone='12345678901', address='umar address', grade='first')
+    bor3y = Student(student_name='bor3y', email='bor3y@gmail.com', password='password', student_phone='12345678901', parent_name='bor3y parent', parent_phone='12345678901', address='bor3y address', grade='first')
     session1 = Session(grade='first')
     session2 = Session(grade='first')
     session3 = Session(grade='first')
