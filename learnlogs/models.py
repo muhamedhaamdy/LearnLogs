@@ -21,7 +21,7 @@ Student_Session = db.Table(
         'id', db.Integer, primary_key=True), db.Column(
             'student_id', db.Integer, db.ForeignKey('student.id')), db.Column(
                 'session_id', db.Integer, db.ForeignKey('session.id')), db.Column(
-                    'mark', db.Integer, default=None), db.Column(
+                    'mark', db.Integer, default=0), db.Column(
                         'full_mark', db.Integer, default=10))
 
 

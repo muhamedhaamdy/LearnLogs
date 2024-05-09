@@ -17,8 +17,9 @@ class EnrollForm(FlaskForm):
     parent_name = StringField('Parent Name', validators=[DataRequired()], render_kw={"placeholder": "Enter your parent's name"})
     parent_phone = StringField('Parent Phone', validators=[DataRequired()], render_kw={"placeholder": "Enter your parent's phone number"})
     address = StringField('Address', validators=[DataRequired()], render_kw={"placeholder": "Enter your address"})
-    photo_link = StringField('Photo Link', render_kw={"placeholder": "Enter the URL of your photo (optional)"})
-    grade = StringField('Grade', validators=[DataRequired()], render_kw={"placeholder": "Enter your grade"})
+    photo_link = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    grade = SelectField('Grade', choices=[('first', 'First'), 
+                                          ('second', 'Second'), ('third', 'Third')], validators=[InputRequired()])
     enroll = SubmitField('Enroll')
 
     def validate_email(self, email):
@@ -39,7 +40,7 @@ class LoginForm(FlaskForm):
 
 class QuizForm(FlaskForm):
     """Quiz Form"""
-    absent = BooleanField('Absent')
+    absent = BooleanField('Absent', validators=[])
     quiz_mark = IntegerField('Quiz Mark')
 
 

@@ -10,6 +10,8 @@
     
 
     <link rel="stylesheet" type="text/css" href="../static/styles/main.css">
+    <link href="../static/images/logo.png" rel="icon">
+    <link href="../static/images/logo.png" rel="apple-touch-icon">
     {% if title %}
       <title>LearnLogs - {{ title }}</title>
       {% if title == 'Home' %}
@@ -55,7 +57,7 @@
     <header class="site-header">
     </header>
     <main role="main" class="container">
-      <div class="row justify-content-center h-1000">
+      <div class="row justify-content-center h-  ">
         <div class="col-md-10">
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

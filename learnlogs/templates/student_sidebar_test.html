@@ -11,6 +11,8 @@
     <!-- <link rel="stylesheet" type="text/css" href="../static/styles/main.css"> -->
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="../static/assets/css/dashborad.css">
+    <link href="../static/images/logo.png" rel="icon">
+    <link href="../static/images/logo.png" rel="apple-touch-icon">
 </head>
 
 <body>
@@ -19,8 +21,9 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="/">
-                        <span class="title">LearnLogs</span>
+                    <a href="/home">
+                        <img style="margin-top:10px; width:50px" src="../static/images/logo.png" alt="Logo">
+                        <h1 style="margin-top: 20px; margin-left:20px">LearnLogs</h1>
                     </a>
                 </li>
                 {% if current_user.email == 'teacher@gmail.com' %}

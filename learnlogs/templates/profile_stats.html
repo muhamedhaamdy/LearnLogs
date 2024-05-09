@@ -6,13 +6,12 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../static/assets/css/profile.css">
 <!-- CSS Files -->
-<!-- <link rel="stylesheet" href="../static/assets/css/dashborad.css"> -->
-<!-- <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet" /> -->
-<link href="../static/assets/css/paper-dashboard.css" rel="stylesheet" />
+<link rel="stylesheet" href="../static/assets/css/dashborad.css">
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/billboard.js/dist/billboard.min.css" />
 <link rel="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"type="text/css" />
+<link rel="stylesheet" href="../static/styles/student_stats.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1/Chart.min.js"></script>
@@ -20,97 +19,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"type="text/javascript"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
-
-<style>
-/* Custom styles for the container */
-.custom-container {
-    display: flex;
-    flex-direction: row; /* Align cards horizontally */
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Custom styles for the cards */
-.custom-card {
-    background-color: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 30%; /* Adjust the percentage as needed */
-    max-width: 300px; /* Set a max-width to prevent excessive expansion */
-    transition: transform 0.3s ease; /* Smooth transition for translation */
-}
-
-.custom-card:hover {
-    border: 1px solid #007bff; /* Change border color on hover */
-    transform: translateY(-5px); /* Translate cards upwards slightly on hover */
-}
-/* Custom styles for the card body */
-.custom-card-body {
-    padding: 20px;
-}
-
-/* Custom styles for the icon */
-.custom-icon-big {
-    font-size: 36px;
-}
-
-/* Custom styles for the icon color */
-.custom-icon-warning {
-    color: #ffc107;
-}
-
-/* Custom styles for the numbers */
-.custom-numbers {
-    text-align: center;
-}
-
-/* Custom styles for the category */
-.custom-category {
-    font-size: 14px;
-    color: #6c757d;
-}
-
-/* Custom styles for the title */
-.custom-title {
-    font-size: 24px;
-    margin-top: 5px;
-}
-/* Media query for small devices */
-@media (max-width: 576px) {
-    /* Adjust column width for small devices */
-    .custom-col-5,
-    .custom-col-md-4,
-    .custom-col-7,
-    .custom-col-md-5 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-    .custom-container {
-        flex-direction: column; /* Align cards vertically */
-    }
-
-}
-.card {
-    margin-top: 20px;
-    border: 0;
-    border-radius: 6px;
-    color: #333;
-    background: #fff;
-    width: 100%;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
-    display: inline-block;
-    position: relative;
-    margin: 25px 0;
-    font-weight: 300;
-    text-align: center;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-</style>
 
 <div class="col-8">
     <div class="content">
@@ -120,7 +28,7 @@
                     <div class="row justify-content-center">
                         <div class="custom-col-5 custom-col-md-4">
                             <div class="custom-icon-big text-center custom-icon-warning">
-                                <i class="nc-icon nc-globe text-warning"></i>
+                                <ion-icon class="iconss" name="checkmark-done-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="custom-col-7 custom-col-md-5">
@@ -137,7 +45,7 @@
                     <div class="row justify-content-center">
                         <div class="custom-col-5 custom-col-md-4">
                             <div class="custom-icon-big text-center custom-icon-warning">
-                                <i class="nc-icon nc-money-coins text-success"></i>
+                                <ion-icon class="iconss" name="analytics-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="custom-col-7 custom-col-md-5">
@@ -154,7 +62,7 @@
                     <div class="row justify-content-center">
                         <div class="custom-col-5 custom-col-md-4">
                             <div class="custom-icon-big text-center custom-icon-warning">
-                                <i class="nc-icon nc-favourite-28 text-primary"></i>
+                                <ion-icon class="iconss" name="bar-chart-outline"></ion-icon>
                             </div>
                         </div>
                         <div class="custom-col-7 custom-col-md-5">
@@ -249,5 +157,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

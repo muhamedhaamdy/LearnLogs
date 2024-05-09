@@ -63,6 +63,8 @@ def login():
         the login page: this page to login as a student or teacher
     """
     form = LoginForm()
+    if current_user.is_authenticated:
+        return redirect(url_for('profile1', id=current_user.id))
     if form.validate_on_submit():
         if form.email.data == 'teacher@gmail.com' and form.password.data == '1234':
             login_user(
@@ -77,7 +79,7 @@ def login():
             return redirect(url_for('profile1', id=student.id))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('index.html', title='Login', form=form)
+    return render_template('login.html', title='Login', form=form)
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -393,12 +395,9 @@ def all_session_grade(grade):
                 'teacher@gmail.com'):
             all_session = Session.query.filter_by(grade=grade).all()
             student = Student.query.filter_by(grade=grade).first()
-            if all_session:
-                return render_template(
-                    'all_session_grade.html',sessions=all_session,student=student,
-                    title='session_grade')
-            else:
-                return render_template('error_page.html', title='Register', message='No session found')
+            return render_template('all_session_grade.html',
+                                   sessions=all_session, student=student,
+                                   grade=grade, title='session_grade')
         else:
            return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
