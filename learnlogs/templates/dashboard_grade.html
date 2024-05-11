@@ -1,57 +1,6 @@
 {% extends "teacher_sidebar.html" %}
 {% block content %}
-<style>
-    .custom-container {
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    .custom-header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .custom-card {
-        border-radius: 10px;
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        transition: transform 0.3s;
-    }
-    .custom-card:hover {
-        transform: translateY(-5px);
-        border: 1px solid #007bff;
-    }
-    .custom-card h5 {
-        margin-bottom: 5px;
-        font-size: 18px;
-    }
-    .custom-card p {
-        margin-bottom: 5px;
-    }
-    .custom-percentage-box {
-        background-color: #f0f0f0;
-        color: #333;
-        padding: 5px 10px;
-        border-radius: 5px;
-        display: inline-block;
-        margin-right: 10px;
-    }
-    .custom-btn {
-        background-color: #1484d4;
-        color: #fff;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        text-decoration: none;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .custom-btn:hover {
-        background-color: #0056b3;
-    }
-</style>
-
+<link rel="stylesheet" href="../static/styles/dashboard_grade.css">
 <div class="custom-container">
     <h2 class="custom-header">Student Marks and Attendance</h2>
     <div class="custom-name">

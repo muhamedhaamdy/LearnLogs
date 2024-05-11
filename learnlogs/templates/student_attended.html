@@ -1,0 +1,19 @@
+{% extends "teacher_sidebar.html" %}
+{% block content %}
+<link rel="stylesheet" href="../static/styles/dashboard_grade.css">
+<div class="custom-container">
+    <h2 class="custom-header">Student Attended Session: {{ sessions.title }}</h2>
+    <div class="custom-name">
+        {% for student in students %}
+        <div class="custom-card">
+            <h5>Student Name: {{ all_students[student.id]['student_name'] }}</h5>
+            <p>
+                <span class="custom-percentage-box">Marks: {{ all_students[student.id]['precentage']|round(2) }}%</span>
+                <span class="custom-percentage-box">Attended</span>
+                <a href="{{ url_for('profile1', id=student.id) }}" class="custom-btn">Details</a>
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

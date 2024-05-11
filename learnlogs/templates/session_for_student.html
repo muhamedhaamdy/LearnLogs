@@ -1,67 +1,6 @@
 {% extends 'student_sidebar_test.html' %}
 {% block content %}
-<style>
-.custom_container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.title-card-session {
-    color: #1484d4;
-    margin-bottom: 20px;
-}
-
-.card {
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    transition: box-shadow 0.3s ease;
-}
-
-.card:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card-title {
-    font-size: 1.2rem;
-    color: #333;
-}
-
-.card-text {
-    color: #666;
-}
-
-/* Video Attachment Styling */
-.video-attachment {
-    border-radius: 10px;
-    padding: 40px 20px;
-}
-
-.video-attachment .card-title {
-    color: #1484d4;
-    margin-bottom: 20px;
-}
-
-.embed-responsive {
-    width: 100%;
-    max-width: 960px; /* Adjust width to make it larger */
-    margin-bottom: 20px;
-}
-
-.video-attachment video {
-    width: 100%;
-    max-width: 960px; /* Adjust width to match the embed */
-    height: auto;
-}
-
-</style>
+<link rel="stylesheet" href="../static/styles/session_info.css">
 <div class="custom_container">
     <h1 class="mb-4 h1 text-center title-card-session">Session Title:{{ session.title }}</h1>
     <div class="card">
@@ -83,5 +22,10 @@
             </video>                
         </div>
     </div>
+    {% if current_user.email == 'teacher@gmail.com' %}
+    <div class="centered-link">
+        <a href="{{ url_for('student_attended', id=session.id) }}" class="custom-btn">Student Attended</a>
+    </div>    
+    {% endif %}
 </div>
 {% endblock %}

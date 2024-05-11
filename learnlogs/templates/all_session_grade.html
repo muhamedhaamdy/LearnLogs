@@ -11,13 +11,23 @@
         <div class="custom-card">
             <div class="custom-card-body">
                 <h3 class="custom-card-title">{{ session.title }}</h3>
-                <p class="custom-card-text">{{ session.description }}</p>
-                <a href="{{ url_for('session_info_for_student', session_id=session.id, student_id=student.id) }}" class="custom-button">View Details</a>
+                <div class="custom-card-content">
+                    <p class="custom-card-text">{{ session.description }}</p>
+                    <a href="{{ url_for('session_info_for_student', session_id=session.id, student_id=student.id) }}" class="custom-button">View Details</a>
+                </div>
+                <a href="{{ url_for('student_attended', id=session.id) }}">
+                    <div class="custom-student-attended">
+                        <div class="student-attended-inner">
+                            <p>Student Attended</p>
+                            <p>{{ session.attended_student|length }} / {{number_of_students}}</p>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
     <br></br>
-    {% endfor %}
+{% endfor %}
 </div>
 
 <div style="text-align: center; margin-top: 20px;margin-bottom: 200px;">

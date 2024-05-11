@@ -395,15 +395,42 @@ def all_session_grade(grade):
                 'teacher@gmail.com'):
             all_session = Session.query.filter_by(grade=grade).all()
             student = Student.query.filter_by(grade=grade).first()
+            number_of_students = len(Student.query.filter_by(grade=grade).all())
             return render_template('all_session_grade.html',
-                                   sessions=all_session, student=student,
+                                   sessions=all_session, student=student, number_of_students=number_of_students,
                                    grade=grade, title='session_grade')
         else:
            return render_template('error_page.html', title='Register', message='you can only view your profile')
     else:
        return render_template('error_page.html', title='Register', message='you can only view your profile')
 
+@login_required
+@app.route('/student_attended/<int:id>', methods=['GET', 'POST'])
+def student_attended(id):
+    """dashboard_grade page
 
+    Args:
+        grade (string): input grade to show the dashboard for this grade
+
+    Returns:
+        the grade page: the dashboard page for the teacher for a specific grade
+    """
+    if current_user.is_authenticated:
+        if current_user.email == ('teacher@gmail.com'):
+            session = Session.query.filter_by(id=id).first()
+            grade = session.grade
+            all_data = get_by_grade(grade)
+            students_attended = session.attended_student 
+            return render_template(
+                'student_attended.html',
+                all_students=all_data,
+                students=students_attended,
+                sessions=session,
+                title='student attended')
+        else:
+           return render_template('error_page.html', title='Register', message='this page is only for teacher')
+    else:
+        return render_template('error_page.html', title='Register', message='this page is only for teacher')
 
 
 @login_required
