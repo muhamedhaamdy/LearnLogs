@@ -210,6 +210,12 @@ def profile2(id):
             all_grade_data = get_by_grade(student.grade)
             student_data = all_grade_data[student.id]
             list_of_student_marks = get_list_of_student_marks(student)
+            students_rank = get_top(student.grade)
+            rating = 0
+            for index, (key, value) in enumerate(students_rank.items()):
+                if key == id:
+                    rating = index + 1
+                    break
             if student:
                 return render_template(
                     'profile_stats.html',
@@ -221,6 +227,7 @@ def profile2(id):
                     sessions_number=len(all_session),
                     precentage=student_data['precentage'],
                     list_of_student_marks=list_of_student_marks,
+                    rating=rating,
                     title='Profile')
         else:
            return render_template('error_page.html', title='Register', message='you can only view your profile')

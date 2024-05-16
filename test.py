@@ -22,10 +22,11 @@ with app.app_context():
     db.session.commit()
 
     session_first1 = Session(title='Newton first law', description='bla bla', grade='first')
-    db.session.add(session_first1)
+    session_first2 = Session(title='Newton second law', description='bla bla', grade='first')
+    session_first3 = Session(title='Newton third law', description='bla bla', grade='first')
+    
+    db.session.add_all([session_first1, session_first2, session_first3])
     db.session.commit()
-    # session_first2 = Session(title='Newton second law', description='bla bla', grade='first')
-    # session_first3 = Session(title='Newton third law', description='bla bla', grade='first')
     # session_second1 = Session(title='Pythagoras law', description='bla bla', grade='second')
     # session_second2 = Session(title='Euclid law', description='bla bla', grade='second')
     # session_third1 = Session(title='quntam mechanics', description='bla bla', grade='third')
@@ -37,28 +38,50 @@ with app.app_context():
     # db.session.commit()
 
     student_session_entry1 = Student_Session.insert().values(student_id=saad.id, session_id=session_first1.id, mark=7)
-    # student_session_entry2 = Student_Session.insert().values(student_id=saad.id, session_id=session_first2.id, mark=8)
-    # student_session_entry3 = Student_Session.insert().values(student_id=saad.id, session_id=session_first3.id, mark=9)
+    student_session_entry2 = Student_Session.insert().values(student_id=saad.id, session_id=session_first2.id, mark=8)
+    student_session_entry3 = Student_Session.insert().values(student_id=saad.id, session_id=session_first3.id, mark=9)
     student_session_entry4 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first1.id, mark=3)
-    # student_session_entry5 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first2.id, mark=8)
-    # student_session_entry6 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first3.id, mark=10)
-    # student_session_entry7 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second1.id, mark=10)
-    # student_session_entry8 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second2.id, mark=10)
+    student_session_entry5 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first2.id, mark=8)
+    student_session_entry6 = Student_Session.insert().values(student_id=swefy.id, session_id=session_first3.id, mark=10)
     student_session_entry9 = Student_Session.insert().values(student_id=bor3y.id, session_id=session_first1.id, mark=5)
-    # student_session_entry10 = Student_Session.insert().values(student_id=hazems.id, session_id=session_third2.id, mark=6)
+    student_session_entry10 = Student_Session.insert().values(student_id=bor3y.id, session_id=session_first2.id, mark=6)
+    student_session_entry11 = Student_Session.insert().values(student_id=bor3y.id, session_id=session_first3.id, mark=7)
+    student_session_entry12 = Student_Session.insert().values(student_id=khalil.id, session_id=session_first1.id, mark=10)
+    student_session_entry13 = Student_Session.insert().values(student_id=khalil.id, session_id=session_first2.id, mark=10)
+    student_session_entry14 = Student_Session.insert().values(student_id=khalil.id, session_id=session_first3.id, mark=10)
+
 
     db.session.execute(student_session_entry1)
+    db.session.execute(student_session_entry2)
+    db.session.execute(student_session_entry3)
+    db.session.execute(student_session_entry4)
+    db.session.execute(student_session_entry5)
+    db.session.execute(student_session_entry6)
+    db.session.execute(student_session_entry9)
+    db.session.execute(student_session_entry10)
+    db.session.execute(student_session_entry11)
+    db.session.execute(student_session_entry12)
+    db.session.execute(student_session_entry13)
+    db.session.execute(student_session_entry14)
+
+    db.session.commit()
+
+    # student_session_entry7 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second1.id, mark=10)
+    # student_session_entry8 = Student_Session.insert().values(student_id=abdo.id, session_id=session_second2.id, mark=10)
+    # student_session_entry10 = Student_Session.insert().values(student_id=hazems.id, session_id=session_third2.id, mark=6)
+
+    # db.session.execute(student_session_entry1)
     # db.session.execute(student_session_entry2)
     # db.session.execute(student_session_entry3)
-    db.session.execute(student_session_entry4)
+    # db.session.execute(student_session_entry4)
     # db.session.execute(student_session_entry5)
     # db.session.execute(student_session_entry6)
     # db.session.execute(student_session_entry7)
     # db.session.execute(student_session_entry8)
-    db.session.execute(student_session_entry9)
+    # db.session.execute(student_session_entry9)
     # db.session.execute(student_session_entry10)
 
-    db.session.commit()
+    # db.session.commit()
 
     # top = get_top('first')
     # first_element = next(iter(top.items()))
@@ -71,9 +94,17 @@ with app.app_context():
     # print(mark2)
     # mark3 = get_list_of_student_marks(bor3y)
     # print(mark3)
-    session = Session.query.filter_by(grade='first').first()
-    print(len(session.attended_student))
+    
+    firts_grade_rating = get_top('first')
+    print(firts_grade_rating)
+    rating = 0
 
+    target_key = saad.id
+    for index, (key, value) in enumerate(firts_grade_rating.items()):
+        if key == target_key:
+            rating = index + 1
+            break
+    print(rating)
 '''
     all_students_first = Student.query.filter_by(grade='first').all()
     all_students_second = Student.query.filter_by(grade='second').all()
